@@ -35,13 +35,12 @@ setup(
     url=URL,
     packages=find_packages(exclude=["tests.*", "tests"]),
     classifiers=[
-        "Development Status :: 1 - Alpha",
-        "Environment :: Service Environment",
+        "Development Status :: 1 - Planning",
+        "Environment :: Plugins",
         "Intended Audience :: Developers",
         "License :: OSI Approved :: BSD License",
-        "Operating System :: Linux",
+        "Operating System :: POSIX :: Linux",
         "Programming Language :: Python",
-        "Framework :: None",
         ],
     zip_safe=False,
 )
