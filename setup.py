@@ -34,6 +34,9 @@ setup(
     license="BSD",
     url=URL,
     packages=find_packages(exclude=["tests.*", "tests"]),
+    package_data={
+        '': ['*.json'],
+    },
     classifiers=[
         "Development Status :: 1 - Planning",
         "Environment :: Plugins",

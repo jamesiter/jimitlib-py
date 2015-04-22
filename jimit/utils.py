@@ -20,7 +20,7 @@ except Exception, e:
     exit()
 
 
-class Utils():
+class Commons():
 
     def __init__(self):
         pass
@@ -28,10 +28,13 @@ class Utils():
     @staticmethod
     def exchange_state(code):
         if not isinstance(code, int):
-            result = Utils.exchange_state(50001)
+            result = Commons.exchange_state(50001)
             return result
 
         trunk_code = int(code / 100)
+        if str(trunk_code) not in index_state['trunk']:
+            result = Commons.exchange_state(50002)
+            return result
 
         result = copy.copy(index_state['trunk'][(str(trunk_code))])
 
@@ -40,24 +43,36 @@ class Utils():
 
         return result
 
+
+class Check():
+
+    def __init__(self):
+        pass
+
     @staticmethod
     def previewing(member=list(), set_=dict()):
         result = dict()
-        result['state'] = Utils.exchange_state(20000)
+        result['state'] = Commons.exchange_state(20000)
 
         for item in member:
             if item not in set_:
-                result['state'] = Utils.exchange_state(41201)
+                result['state'] = Commons.exchange_state(41201)
                 result['state']['sub']['zh-cn'] = ''.join([result['state']['sub']['zh-cn'], item])
                 return result
 
         return result
 
+
+class Convert():
+
+    def __init__(self):
+        pass
+
     @staticmethod
     def sql2json(sql_obj):
         j_sql = dict()
         result = dict()
-        result['state'] = Utils.exchange_state(20000)
+        result['state'] = Commons.exchange_state(20000)
 
         try:
             for col in sql_obj._sa_class_manager.mapper.mapped_table.columns:
@@ -66,7 +81,7 @@ class Utils():
                 else:
                     j_sql[col.name] = getattr(sql_obj, col.name)
         except Exception, e:
-            result['state'] = Utils.exchange_state(50002)
+            result['state'] = Commons.exchange_state(50003)
             result['state']['sub']['detail'] = e.message
             return result
 
