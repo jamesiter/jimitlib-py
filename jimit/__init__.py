@@ -13,7 +13,7 @@ from utils import (
     Convert
 )
 
-__version__ = "0.11"
+__version__ = "0.14"
 
 __all__ = [
     'Commons', 'Check', 'Convert'

@@ -6,18 +6,10 @@ __date__ = '15/4/20'
 __contact__ = 'james.iter.cn@gmail.com'
 __copyright__ = '(c) 2015 by James Iter.'
 
-import os
-import json
 import copy
 import decimal
 
-try:
-    file_path = os.path.join(os.path.dirname(__file__), 'state_code.json')
-    with open(file_path) as f:
-        index_state = json.load(f)
-except Exception, e:
-    print e.message
-    exit()
+from state_code import *
 
 
 class Commons():
