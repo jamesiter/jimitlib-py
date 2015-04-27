@@ -7,13 +7,19 @@ __contact__ = 'james.iter.cn@gmail.com'
 __copyright__ = '(c) 2015 by James Iter.'
 
 
-from utils import (
-    Commons,
-    Check,
+from commons import (
+    Commons
+)
+
+from check import (
+    Check
+)
+
+from convert import (
     Convert
 )
 
-__version__ = "0.14"
+__version__ = "0.15"
 
 __all__ = [
     'Commons', 'Check', 'Convert'
