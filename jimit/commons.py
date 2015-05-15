@@ -6,6 +6,7 @@ __date__ = '15/4/27'
 __contact__ = 'james.iter.cn@gmail.com'
 __copyright__ = '(c) 2015 by James Iter.'
 
+import time
 import copy
 from state_code import *
 
@@ -32,3 +33,8 @@ class Commons():
             result['sub'] = copy.copy(index_state["branch"][(str(code))])
 
         return result
+
+
+    @staticmethod
+    def ts():
+        return int(time.time())

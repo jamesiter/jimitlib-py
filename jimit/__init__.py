@@ -19,8 +19,12 @@ from convert import (
     Convert
 )
 
-__version__ = "0.15"
+from ji_time import (
+    JITime
+)
+
+__version__ = "0.17"
 
 __all__ = [
-    'Commons', 'Check', 'Convert'
+    'Commons', 'Check', 'Convert', 'JITime'
 ]

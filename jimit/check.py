@@ -39,12 +39,18 @@ class Check():
                 member_name = item[1]
 
             elif item.__len__() == 1:
-                member_name = item[1]
+                member_name = item[0]
 
             else:
                 result['state'] = Commons.exchange_state(41205)
                 result['state']['sub']['zh-cn'] = ''.join([result['state']['sub']['zh-cn'], '，收到 ',
                                                            str(item.__len__()), '，源自 ', str(item)])
+                return result
+
+            if type(member_name).__name__ != 'str':
+                result['state'] = Commons.exchange_state(41207)
+                result['state']['sub']['zh-cn'] = ''.join([result['state']['sub']['zh-cn'], '，收到 ',
+                                                           type(member_name).__name__, '，源自 ', str(item)])
                 return result
 
             if member_name not in set_:
