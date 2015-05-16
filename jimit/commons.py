@@ -8,6 +8,8 @@ __copyright__ = '(c) 2015 by James Iter.'
 
 import time
 import copy
+import socket
+import os
 from state_code import *
 
 
@@ -38,3 +40,25 @@ class Commons():
     @staticmethod
     def ts():
         return int(time.time())
+
+    @staticmethod
+    def get_hostname():
+        return socket.gethostname()
+
+    @staticmethod
+    def get_environment(according_to_hostname=True):
+
+        def exchange_env(environment_string):
+            if environment_string.lower().find('debug') != -1:
+                return 'debug'
+            elif environment_string.lower().find('sandbox') != -1:
+                return 'sandbox'
+            else:
+                return 'production'
+
+        if according_to_hostname:
+            environment = exchange_env(Commons.get_hostname())
+        else:
+            environment = exchange_env(os.environ.get('JI_ENVIRONMENT', ''))
+
+        return environment

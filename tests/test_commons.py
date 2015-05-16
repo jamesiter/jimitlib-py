@@ -26,6 +26,29 @@ class TestCommons(unittest.TestCase):
         import time
         self.assertEqual(int(time.time()), Commons.ts())
 
+    def test_get_hostname(self):
+        import socket
+        self.assertEqual(socket.gethostname(), Commons.get_hostname())
+
+    def test_get_environment(self):
+        import os
+        os.environ['JI_ENVIRONMENT'] = 'debug.host.com'
+        self.assertEqual('debug', Commons.get_environment(False))
+
+        os.environ['JI_ENVIRONMENT'] = 'sandbox.host.com'
+        self.assertEqual('sandbox', Commons.get_environment(False))
+
+        os.environ.pop('JI_ENVIRONMENT')
+        self.assertEqual('production', Commons.get_environment(False))
+
+        hostname = Commons.get_hostname()
+        if hostname.lower().find('debug') != -1:
+            self.assertEqual('debug', Commons.get_environment(True))
+        elif hostname.lower().find('sandbox') != -1:
+            self.assertEqual('sandbox', Commons.get_environment(True))
+        else:
+            self.assertEqual('production', Commons.get_environment(True))
+
 
 if __name__ == '__main__':
     unittest.main()

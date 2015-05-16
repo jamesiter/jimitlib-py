@@ -26,3 +26,7 @@ class TestRouter(unittest.TestCase):
     def test_launcher(self):
         router_table['today'] = JITime.today
         self.assertEqual(Router.launcher(action='today', content='-'), JITime.today())
+
+
+if __name__ == '__main__':
+    unittest.main()

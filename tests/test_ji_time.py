@@ -37,3 +37,7 @@ class TestJITime(unittest.TestCase):
 
     def test_week(self):
         self.assertEqual(time.strftime('%W'), JITime.week())
+
+
+if __name__ == '__main__':
+    unittest.main()

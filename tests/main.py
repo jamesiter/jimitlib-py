@@ -10,5 +10,6 @@ import tests
 import unittest
 
 
-suite = tests.load_tests(unittest.TestLoader(), unittest.TestSuite())
-unittest.TextTestRunner(verbosity=2).run(suite)
+if __name__ == '__main__':
+    suite = tests.load_tests(unittest.TestLoader(), unittest.TestSuite())
+    unittest.TextTestRunner(verbosity=2).run(suite)
