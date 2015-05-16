@@ -1,20 +1,18 @@
 # James Iter's library by python
 
-## 建议
-- 基于各主干的枝叶状态码从50开始，如412主干，则用户自定义枝叶状态码由41250起。
-
-***
-
-## 示例
+## 添加自定义状态码示例
 - 枝叶状态码合并
 
 ``` python
+import jimit as ji
+
 own_state_branch = {
         '41250': {
             'code': '41250',
             'zh-cn': '账密不匹配'
             }
         }
+        
 ji.state_code.index_state['branch'] = dict(ji.state_code.index_state['branch'], **own_state_branch)
 print json.dumps(ji.Commons.exchange_state(41250), ensure_ascii=False)
 
@@ -28,6 +26,11 @@ print json.dumps(ji.Commons.exchange_state(41250), ensure_ascii=False)
     }
 }
 ```
+
+## 自定义状态码建议
+- 基于各主干的枝叶状态码从50开始，如412主干，则用户自定义枝叶状态码由41250起。
+
+***
 
 ## 路由器示例
 ``` python
