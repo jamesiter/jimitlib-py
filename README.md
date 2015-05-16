@@ -39,7 +39,9 @@ import unittest
 reload(sys)
 sys.setdefaultencoding('utf8')
 
-# 首先配置路由表
+'''
+首先配置路由表
+'''
 router_table['today'] = JITime.today
 
 '''
