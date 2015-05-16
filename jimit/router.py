@@ -17,11 +17,11 @@ class Router():
         pass
 
     @staticmethod
-    def not_found():
+    def not_found(content):
         return Commons.exchange_state(50100)
 
     @staticmethod
     def launcher(**kwargs):
         action = kwargs.get('action', None)
-        launcher = router_table.get(action, Router.not_found)
-        print launcher()
+        content = kwargs.get('content', None)
+        return router_table.get(action, Router.not_found)(content)

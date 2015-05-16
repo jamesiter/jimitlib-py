@@ -9,14 +9,11 @@ __copyright__ = '(c) 2015 by James Iter.'
 import sys
 sys.path.append("..")
 from jimit.router import Router, router_table
+from jimit.ji_time import JITime
 import unittest
-import time
 
 reload(sys)
 sys.setdefaultencoding('utf8')
-
-
-router_table['ts'] = time.time
 
 
 class TestRouter(unittest.TestCase):
@@ -27,5 +24,5 @@ class TestRouter(unittest.TestCase):
         pass
 
     def test_launcher(self):
-        Router.launcher(action='s')
-        self.assertEqual(0, 0)
+        router_table['today'] = JITime.today
+        self.assertEqual(Router.launcher(action='today', content='-'), JITime.today())
