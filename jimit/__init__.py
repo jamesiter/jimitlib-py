@@ -23,8 +23,12 @@ from ji_time import (
     JITime
 )
 
-__version__ = "0.17"
+from router import (
+    Router
+)
+
+__version__ = "0.18"
 
 __all__ = [
-    'Commons', 'Check', 'Convert', 'JITime'
+    'Commons', 'Check', 'Convert', 'JITime', 'Router'
 ]
