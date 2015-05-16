@@ -36,7 +36,6 @@ class Commons():
 
         return result
 
-
     @staticmethod
     def ts():
         return int(time.time())

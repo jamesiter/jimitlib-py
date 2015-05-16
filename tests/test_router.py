@@ -12,9 +12,6 @@ from jimit.router import Router, router_table
 from jimit.ji_time import JITime
 import unittest
 
-reload(sys)
-sys.setdefaultencoding('utf8')
-
 
 class TestRouter(unittest.TestCase):
     def setUp(self):

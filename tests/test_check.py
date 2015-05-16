@@ -11,9 +11,6 @@ sys.path.append("..")
 from jimit.check import Check
 import unittest
 
-reload(sys)
-sys.setdefaultencoding('utf8')
-
 
 class TestCheck(unittest.TestCase):
     def setUp(self):

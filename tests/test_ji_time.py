@@ -12,9 +12,6 @@ from jimit.ji_time import JITime
 import unittest
 import time
 
-reload(sys)
-sys.setdefaultencoding('utf8')
-
 
 class TestJITime(unittest.TestCase):
     def setUp(self):
