@@ -49,6 +49,15 @@ class TestCommons(unittest.TestCase):
         else:
             self.assertEqual('production', Commons.get_environment(True))
 
+    def test_calc_sha1_by_file(self):
+        import os, hashlib
+        file_path = __file__
+        ret = Commons.calc_sha1_by_file(file_path)
+        self.assertEqual('200', ret['state']['code'])
+        with open(file_path, 'rb') as f:
+            sha1_obj = hashlib.sha1()
+            sha1_obj.update(f.read())
+            self.assertEqual(ret['sha1'], sha1_obj.hexdigest())
 
 if __name__ == '__main__':
     unittest.main()
