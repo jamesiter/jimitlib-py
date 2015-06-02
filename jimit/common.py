@@ -14,7 +14,7 @@ import hashlib
 from state_code import *
 
 
-class Commons():
+class Common():
 
     def __init__(self):
         pass
@@ -22,12 +22,12 @@ class Commons():
     @staticmethod
     def exchange_state(code):
         if not isinstance(code, int):
-            result = Commons.exchange_state(50001)
+            result = Common.exchange_state(50001)
             return result
 
         trunk_code = int(code / 100)
         if str(trunk_code) not in index_state['trunk']:
-            result = Commons.exchange_state(50002)
+            result = Common.exchange_state(50002)
             return result
 
         result = copy.copy(index_state['trunk'][(str(trunk_code))])
@@ -57,7 +57,7 @@ class Commons():
                 return 'production'
 
         if according_to_hostname:
-            environment = exchange_env(Commons.get_hostname())
+            environment = exchange_env(Common.get_hostname())
         else:
             environment = exchange_env(os.environ.get('JI_ENVIRONMENT', ''))
 
@@ -66,10 +66,10 @@ class Commons():
     @staticmethod
     def calc_sha1_by_file(file_path):
         result = dict()
-        result['state'] = Commons.exchange_state(20000)
+        result['state'] = Common.exchange_state(20000)
 
         if not os.path.isfile(file_path):
-            result['state'] = Commons.exchange_state(40401)
+            result['state'] = Common.exchange_state(40401)
             result['state']['sub']['zh-cn'] = ''.join([result['state']['sub']['zh-cn'],
                                                        '，目标"', file_path, '"不是一个有效文件'])
             return result
@@ -80,7 +80,7 @@ class Commons():
                 sha1_obj.update(f.read())
                 result['sha1'] = sha1_obj.hexdigest()
             except Exception, e:
-                result['state'] = Commons.exchange_state(50004)
+                result['state'] = Common.exchange_state(50004)
                 result['state']['sub']['zh-cn'] = ''.join([result['state']['sub']['zh-cn'],
                                                            '，详细信息: ', e.message])
                 return result

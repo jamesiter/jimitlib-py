@@ -7,8 +7,8 @@ __contact__ = 'james.iter.cn@gmail.com'
 __copyright__ = '(c) 2015 by James Iter.'
 
 
-from commons import (
-    Commons
+from common import (
+    Common
 )
 
 from check import (
@@ -27,8 +27,8 @@ from router import (
     Router
 )
 
-__version__ = "0.18"
+__version__ = "0.19"
 
 __all__ = [
-    'Commons', 'Check', 'Convert', 'JITime', 'Router'
+    'Common', 'Check', 'Convert', 'JITime', 'Router'
 ]

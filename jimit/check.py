@@ -6,7 +6,7 @@ __date__ = '15/4/27'
 __contact__ = 'james.iter.cn@gmail.com'
 __copyright__ = '(c) 2015 by James Iter.'
 
-from commons import *
+from common import *
 
 
 class Check():
@@ -17,11 +17,11 @@ class Check():
     @staticmethod
     def previewing(members=list(), set_=dict()):
         result = dict()
-        result['state'] = Commons.exchange_state(20000)
+        result['state'] = Common.exchange_state(20000)
 
         for item in members:
             if not isinstance(item, tuple):
-                result['state'] = Commons.exchange_state(41204)
+                result['state'] = Common.exchange_state(41204)
                 result['state']['sub']['zh-cn'] = ''.join([result['state']['sub']['zh-cn'], '，收到 ',
                                                            type(item).__name__, '，源自 ', str(item)])
                 return result
@@ -42,25 +42,25 @@ class Check():
                 member_name = item[0]
 
             else:
-                result['state'] = Commons.exchange_state(41205)
+                result['state'] = Common.exchange_state(41205)
                 result['state']['sub']['zh-cn'] = ''.join([result['state']['sub']['zh-cn'], '，收到 ',
                                                            str(item.__len__()), '，源自 ', str(item)])
                 return result
 
             if type(member_name).__name__ != 'str':
-                result['state'] = Commons.exchange_state(41207)
+                result['state'] = Common.exchange_state(41207)
                 result['state']['sub']['zh-cn'] = ''.join([result['state']['sub']['zh-cn'], '，收到 ',
                                                            type(member_name).__name__, '，源自 ', str(item)])
                 return result
 
             if member_name not in set_:
-                result['state'] = Commons.exchange_state(41201)
+                result['state'] = Common.exchange_state(41201)
                 result['state']['sub']['zh-cn'] = ''.join([result['state']['sub']['zh-cn'], str(member_name)])
                 return result
 
             if member_type is not None:
                 if not isinstance(set_[member_name], member_type):
-                    result['state'] = Commons.exchange_state(41202)
+                    result['state'] = Common.exchange_state(41202)
                     result['state']['sub']['zh-cn'] = ''.join([result['state']['sub']['zh-cn'], '，预期类型 ',
                                                                member_type.__name__, '，收到 ',
                                                                type(set_[member_name]).__name__,
@@ -70,14 +70,14 @@ class Check():
             if member_range is not None:
                 if isinstance(member_range, tuple):
                     if member_range.__len__() < 2:
-                        result['state'] = Commons.exchange_state(41206)
+                        result['state'] = Common.exchange_state(41206)
                         result['state']['sub']['zh-cn'] = ''.join([result['state']['sub']['zh-cn'], '，预期2个元素，收到 ',
                                                                    str(member_range.__len__()), '，源自 ',
                                                                    str(member_range)])
                         return result
 
                     if not member_range[0] <= set_[member_name] <= member_range[1]:
-                        result['state'] = Commons.exchange_state(41203)
+                        result['state'] = Common.exchange_state(41203)
                         result['state']['sub']['zh-cn'] = ''.join([result['state']['sub']['zh-cn'], '，预期取值范围 ',
                                                                    str(member_range), '，收到 ',
                                                                    str(set_[member_name])])
@@ -85,21 +85,21 @@ class Check():
 
                 elif isinstance(member_range, list):
                     if member_range.__len__() < 1:
-                        result['state'] = Commons.exchange_state(41206)
+                        result['state'] = Common.exchange_state(41206)
                         result['state']['sub']['zh-cn'] = ''.join([result['state']['sub']['zh-cn'], '，不可少于1个，收到 ',
                                                                    str(member_range.__len__()), '，源自 ',
                                                                    str(member_range)])
                         return result
 
                     if set_[member_name] not in member_range:
-                        result['state'] = Commons.exchange_state(41203)
+                        result['state'] = Common.exchange_state(41203)
                         result['state']['sub']['zh-cn'] = ''.join([result['state']['sub']['zh-cn'], '，预期取值范围 ',
                                                                    str(member_range), '，收到 ',
                                                                    str(set_[member_name])])
                         return result
 
                 else:
-                    result['state'] = Commons.exchange_state(41206)
+                    result['state'] = Common.exchange_state(41206)
                     result['state']['sub']['zh-cn'] = ''.join([result['state']['sub']['zh-cn'], '，不支持的类型 ',
                                                                type(member_range).__name__])
                     return result

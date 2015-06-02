@@ -8,7 +8,7 @@ __copyright__ = '(c) 2015 by James Iter.'
 
 import decimal
 
-from commons import *
+from common import *
 
 
 class Convert():
@@ -20,7 +20,7 @@ class Convert():
     def sql2json(sql_obj):
         j_sql = dict()
         result = dict()
-        result['state'] = Commons.exchange_state(20000)
+        result['state'] = Common.exchange_state(20000)
 
         try:
             for col in sql_obj._sa_class_manager.mapper.mapped_table.columns:
@@ -29,7 +29,7 @@ class Convert():
                 else:
                     j_sql[col.name] = getattr(sql_obj, col.name)
         except Exception, e:
-            result['state'] = Commons.exchange_state(50003)
+            result['state'] = Common.exchange_state(50003)
             result['state']['sub']['detail'] = e.message
             return result
 

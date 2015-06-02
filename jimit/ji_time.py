@@ -6,7 +6,7 @@ __date__ = '15/5/16'
 __contact__ = 'james.iter.cn@gmail.com'
 __copyright__ = '(c) 2015 by James Iter.'
 
-from commons import *
+from common import *
 import datetime
 
 
@@ -16,7 +16,7 @@ class JITime():
         pass
 
     @staticmethod
-    def gmt(ts=Commons.ts()):
+    def gmt(ts=Common.ts()):
         return time.strftime('%a, %d %b %Y %H:%M:%S GMT', time.gmtime(ts))
 
     @staticmethod

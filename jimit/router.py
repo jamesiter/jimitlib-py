@@ -6,7 +6,7 @@ __date__ = '15/5/16'
 __contact__ = 'james.iter.cn@gmail.com'
 __copyright__ = '(c) 2015 by James Iter.'
 
-from jimit import Commons
+from jimit import Common
 
 router_table = {}
 
@@ -18,7 +18,7 @@ class Router():
 
     @staticmethod
     def not_found(content):
-        return Commons.exchange_state(50100)
+        return Common.exchange_state(50100)
 
     @staticmethod
     def launcher(**kwargs):
