@@ -27,7 +27,7 @@ from router import (
     Router
 )
 
-__version__ = "0.19"
+__version__ = "0.21"
 
 __all__ = [
     'Common', 'Check', 'Convert', 'JITime', 'Router'

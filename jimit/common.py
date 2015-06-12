@@ -86,3 +86,22 @@ class Common():
                 return result
 
         return result
+
+    @staticmethod
+    def calc_sha1_by_fd(fd):
+        result = dict()
+        result['state'] = Common.exchange_state(20000)
+
+        try:
+            sha1_obj = hashlib.sha1()
+            sha1_obj.update(fd.read())
+            result['sha1'] = sha1_obj.hexdigest()
+        except Exception, e:
+            result['state'] = Common.exchange_state(50004)
+            result['state']['sub']['zh-cn'] = ''.join([result['state']['sub']['zh-cn'],
+                                                       '，详细信息: ', e.message])
+            return result
+        finally:
+            fd.seek(0, 0)
+
+        return result
