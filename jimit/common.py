@@ -11,7 +11,9 @@ import copy
 import socket
 import os
 import hashlib
+import random
 from state_code import *
+import jimit as ji
 
 
 class Common():
@@ -103,5 +105,52 @@ class Common():
             return result
         finally:
             fd.seek(0, 0)
+
+        return result
+
+    @staticmethod
+    def generate_random_code(length, letter_form='mix', numeral=True, spechars=False):
+        args_rules = [
+            (int, 'length', (1, 1000)),
+            (basestring, 'letter_form', ['lower', 'upper', 'mix']),
+            (bool, 'numeral'),
+            (bool, 'spechars')
+        ]
+
+        ret = ji.Check.previewing(args_rules, locals())
+        if '200' != ret['state']['code']:
+            return ret
+
+        result = dict()
+        result['state'] = Common.exchange_state(20000)
+
+        upper = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
+                 'U', 'V', 'W', 'X', 'Y', 'Z']
+        lower = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
+                 'u', 'v', 'w', 'x', 'y', 'z']
+        number = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+        special_characters = ['!', '"', '#', '$', '%', '&', '\'', '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<',
+                              '=', '>', '?', '@', '[', '\\', ']', '^', '_', '`', '{', '|', '}', '~']
+
+        character_codes = []
+        if letter_form == 'lower':
+            character_codes.extend(lower)
+        elif letter_form == 'upper':
+            character_codes.extend(upper)
+        elif letter_form == 'mix':
+            character_codes.extend(lower)
+            character_codes.extend(upper)
+
+        if numeral:
+            character_codes.extend(number)
+
+        if spechars:
+            character_codes.extend(special_characters)
+
+        result['random_code'] = ''
+
+        while length:
+            length -= 1
+            result['random_code'] = ''.join([result['random_code'], random.choice(character_codes)])
 
         return result

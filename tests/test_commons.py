@@ -59,5 +59,9 @@ class TestCommons(unittest.TestCase):
             sha1_obj.update(f.read())
             self.assertEqual(ret['sha1'], sha1_obj.hexdigest())
 
+    def test_generate_random_code(self):
+        ret = Common.generate_random_code(100)
+        self.assertEqual('200', ret['state']['code'])
+
 if __name__ == '__main__':
     unittest.main()
