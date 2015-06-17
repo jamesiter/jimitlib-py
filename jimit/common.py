@@ -44,6 +44,14 @@ class Common():
         return int(time.time())
 
     @staticmethod
+    def tms():
+        return int(time.time() * 1000)
+
+    @staticmethod
+    def tus():
+        return int(time.time() * 1000000)
+
+    @staticmethod
     def get_hostname():
         return socket.gethostname()
 
