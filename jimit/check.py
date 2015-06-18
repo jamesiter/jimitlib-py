@@ -9,13 +9,19 @@ __copyright__ = '(c) 2015 by James Iter.'
 from common import *
 
 
-class Check():
+class Check(object):
 
     def __init__(self):
         pass
 
     @staticmethod
-    def previewing(members=list(), set_=dict()):
+    def previewing(members=None, set_=None):
+        if members is None:
+            members = []
+
+        if set_ is None:
+            set_ = {}
+
         result = dict()
         result['state'] = Common.exchange_state(20000)
 

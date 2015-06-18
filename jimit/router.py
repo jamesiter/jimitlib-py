@@ -11,7 +11,7 @@ from jimit import Common
 router_table = {}
 
 
-class Router():
+class Router(object):
 
     def __init__(self):
         pass

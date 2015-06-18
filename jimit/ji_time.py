@@ -10,7 +10,7 @@ from common import *
 import datetime
 
 
-class JITime():
+class JITime(object):
 
     def __init__(self):
         pass

@@ -16,7 +16,7 @@ from state_code import *
 import jimit as ji
 
 
-class Common():
+class Common(object):
 
     def __init__(self):
         pass

@@ -11,7 +11,7 @@ import decimal
 from common import *
 
 
-class Convert():
+class Convert(object):
 
     def __init__(self):
         pass
