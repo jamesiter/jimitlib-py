@@ -16,6 +16,12 @@ class Check(object):
 
     @staticmethod
     def previewing(members=None, set_=None):
+        """
+        :rtype : dict
+        :param members: 合法对象的规则描述
+        :param set_: 存放对象的集合
+        :return: dict格式的检测结果
+        """
         if members is None:
             members = []
 

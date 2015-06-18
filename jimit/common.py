@@ -23,6 +23,11 @@ class Common(object):
 
     @staticmethod
     def exchange_state(code):
+        """
+        :rtype : dict
+        :param code: 状态码
+        :return: dict格式返回状态信息
+        """
         if not isinstance(code, int):
             result = Common.exchange_state(50001)
             return result
@@ -41,22 +46,43 @@ class Common(object):
 
     @staticmethod
     def ts():
+        """
+        :rtype : int
+        :return: 当前以秒为单位的时间戳
+        """
         return int(time.time())
 
     @staticmethod
     def tms():
+        """
+        :rtype : int
+        :return: 当前以毫秒为单位的时间戳
+        """
         return int(time.time() * 1000)
 
     @staticmethod
     def tus():
+        """
+        :rtype : int
+        :return: 当前已微妙为单位的时间戳
+        """
         return int(time.time() * 1000000)
 
     @staticmethod
     def get_hostname():
+        """
+        :rtype : basestring
+        :return: 主机名
+        """
         return socket.gethostname()
 
     @staticmethod
     def get_environment(according_to_hostname=True):
+        """
+        :rtype : str
+        :param according_to_hostname: 是否按主机名来识别环境
+        :return: 当前所处环境
+        """
 
         def exchange_env(environment_string):
             if environment_string.lower().find('debug') != -1:
@@ -75,6 +101,11 @@ class Common(object):
 
     @staticmethod
     def calc_sha1_by_file(file_path):
+        """
+        :rtype : str
+        :param file_path: 欲计算其sha1 hash值的文件路径
+        :return: lower格式的sha1 hash值
+        """
         result = dict()
         result['state'] = Common.exchange_state(20000)
 
@@ -99,6 +130,11 @@ class Common(object):
 
     @staticmethod
     def calc_sha1_by_fd(fd):
+        """
+        :rtype : str
+        :param fd: 欲计算其sha1 hash值的文件描述符
+        :return: lower格式的sha1 hash值
+        """
         result = dict()
         result['state'] = Common.exchange_state(20000)
 
@@ -118,6 +154,14 @@ class Common(object):
 
     @staticmethod
     def generate_random_code(length, letter_form='mix', numeral=True, spechars=False):
+        """
+        :rtype : str
+        :param length: 随机值长度，最长1000字符
+        :param letter_form: 字母表现形式['lower'(小写) | 'upper'(大写) | 'mix'(混合)]
+        :param numeral: 是否允许数字参选随机值
+        :param spechars: 是否允许特殊字符参选随机值
+        :return: 随机选取的字符串
+        """
         args_rules = [
             (int, 'length', (1, 1000)),
             (basestring, 'letter_form', ['lower', 'upper', 'mix']),

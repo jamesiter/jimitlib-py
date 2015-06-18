@@ -17,20 +17,42 @@ class JITime(object):
 
     @staticmethod
     def gmt(ts=Common.ts()):
+        """
+        :rtype : str
+        :param ts: 指定时间戳，默认系统当前时间戳
+        :return: GMT格式的当前时间('Thu, 18 Jun 2015 10:06:28 GMT')
+        """
         return time.strftime('%a, %d %b %Y %H:%M:%S GMT', time.gmtime(ts))
 
     @staticmethod
     def today(separator='-'):
+        """
+        :rtype : str
+        :param separator: 年、月、日之间的间隔符，默认为'-'
+        :return: 当天日期('2015-06-18')
+        """
         fmt = separator.join(['%Y', '%m', '%d'])
         return time.strftime(fmt)
 
     @staticmethod
     def now_time(separator=':'):
+        """
+        :rtype : str
+        :param separator: 时、分、秒之间的间隔符，默认为':'
+        :return: 当前系统的时间('18:08:28')
+        """
         fmt = separator.join(['%H', '%M', '%S'])
         return time.strftime(fmt)
 
     @staticmethod
     def now_date_time(date_separator='-', time_separator=':', dt_separator=' '):
+        """
+        :rtype : str
+        :param date_separator: 日期年、月、日之间的间隔符，默认为'-'
+        :param time_separator: 时间时、分、秒之间的间隔符，默认为':'
+        :param dt_separator: 日期与时间之间的间隔符，默认为' '
+        :return: 当前系统的日期时间('2015-06-18 18:12:04')
+        """
         fmt = dt_separator.join([date_separator.join(['%Y', '%m', '%d']), time_separator.join(['%H', '%M', '%S'])])
         return time.strftime(fmt)
 
@@ -45,12 +67,28 @@ class JITime(object):
 
     @staticmethod
     def the_day_before_today(offset=0, separator='-'):
+        """
+        :rtype : str
+        :param offset: 以日为单位，向前偏移n值的日期
+        :param separator: 日期年、月、日之间的分隔符，默认为'-'
+        :return: 向前偏移n日的日期(jimit.JITime.the_day_before_today(20) --> '2015-05-29')
+        """
         return JITime.the_day(datetime.date.today()-datetime.timedelta(days=offset), separator)
 
     @staticmethod
     def the_day_after_today(offset=0, separator='-'):
+        """
+        :rtype : str
+        :param offset: 以日为单位，向后偏移n值的日期
+        :param separator: 日期年、月、日之间的间隔符，默认值'-'
+        :return: 向后偏移n日的日期(jimit.JITime.the_day_after_today(20) --> '2015-07-08')
+        """
         return JITime.the_day(datetime.date.today()+datetime.timedelta(days=offset), separator)
 
     @staticmethod
     def week():
+        """
+        :rtype : str
+        :return: 当前系统时间所在当年的周期('24')
+        """
         return time.strftime('%W')
