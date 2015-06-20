@@ -102,7 +102,7 @@ class Common(object):
     @staticmethod
     def calc_sha1_by_file(file_path):
         """
-        :rtype : str
+        :rtype : dict
         :param file_path: 欲计算其sha1 hash值的文件路径
         :return: lower格式的sha1 hash值
         """
@@ -131,7 +131,7 @@ class Common(object):
     @staticmethod
     def calc_sha1_by_fd(fd):
         """
-        :rtype : str
+        :rtype : dict
         :param fd: 欲计算其sha1 hash值的文件描述符
         :return: lower格式的sha1 hash值
         """
@@ -155,7 +155,7 @@ class Common(object):
     @staticmethod
     def generate_random_code(length, letter_form='mix', numeral=True, spechars=False):
         """
-        :rtype : str
+        :rtype : dict
         :param length: 随机值长度，最长1000字符
         :param letter_form: 字母表现形式['lower'(小写) | 'upper'(大写) | 'mix'(混合)]
         :param numeral: 是否允许数字参选随机值
