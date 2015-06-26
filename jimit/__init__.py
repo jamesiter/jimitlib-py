@@ -31,8 +31,12 @@ from security import (
     Security
 )
 
-__version__ = "0.24"
+from net_utils import (
+    NetUtils
+)
+
+__version__ = "0.25"
 
 __all__ = [
-    'Common', 'Check', 'Convert', 'JITime', 'Router', 'Security'
+    'Common', 'Check', 'Convert', 'JITime', 'Router', 'Security', 'NetUtils'
 ]
