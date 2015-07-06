@@ -1,6 +1,7 @@
 Date 2015-06-28
     - 考虑check模块中加入正则表达式检验
     - 当member_type为string时，考虑member_range为tuple类型时，限定的是set_[member_name]字符串长度
+    - 加入非必须选项，即如果该字段存在，则进行校验，不存在则忽略
 
 Date 2015-05-14
     - GMT 格式时间
