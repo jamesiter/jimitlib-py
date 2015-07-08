@@ -68,6 +68,22 @@ class TestCheck(unittest.TestCase):
         }
         self.assertEqual('41207', Check.previewing(form_rules, form)['state']['sub']['code'])
 
+        form_rules = [
+            ('regex:^[a-z0-9]+([._][a-z0-9]+)*@[a-z0-9]+([-][a-z0-9]+)*\.[a-z]+$', 'email')
+        ]
+        form = {
+            'email': 'james.iter.cn@gmail.com'
+        }
+        self.assertEqual('200', Check.previewing(form_rules, form)['state']['code'])
+
+        form_rules = [
+            ('regex:^[a-z0-9]+([._][a-z0-9]+)*@[a-z0-9]+([-][a-z0-9]+)*\.[a-z]+$', 'email')
+        ]
+        form = {
+            'email': '.james.iter.cn@gmail.com'
+        }
+        self.assertEqual('41209', Check.previewing(form_rules, form)['state']['sub']['code'])
+
 
 if __name__ == '__main__':
     unittest.main()

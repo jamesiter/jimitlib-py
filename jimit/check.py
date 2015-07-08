@@ -83,7 +83,7 @@ class Check(object):
 
                 elif isinstance(member_type, basestring):
                     if 0 == member_type.find('regex:'):
-                        if re.match(member_type[6:], set_(member_name)) is None:
+                        if re.match(member_type[6:], set_[member_name]) is None:
                             result['state'] = Common.exchange_state(41209)
                             return result
 
