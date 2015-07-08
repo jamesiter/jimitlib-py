@@ -7,6 +7,7 @@ __contact__ = 'james.iter.cn@gmail.com'
 __copyright__ = '(c) 2015 by James Iter.'
 
 from common import *
+import re
 
 
 class Check(object):
@@ -71,12 +72,25 @@ class Check(object):
                 return result
 
             if member_type is not None:
-                if not isinstance(set_[member_name], member_type):
-                    result['state'] = Common.exchange_state(41202)
-                    result['state']['sub']['zh-cn'] = ''.join([result['state']['sub']['zh-cn'], '，预期类型 ',
-                                                               member_type.__name__, '，收到 ',
-                                                               type(set_[member_name]).__name__,
-                                                               '，源自字段 ', str(member_name)])
+                if isinstance(member_type, type):
+                    if not isinstance(set_[member_name], member_type):
+                        result['state'] = Common.exchange_state(41202)
+                        result['state']['sub']['zh-cn'] = ''.join([result['state']['sub']['zh-cn'], '，预期类型 ',
+                                                                   member_type.__name__, '，收到 ',
+                                                                   type(set_[member_name]).__name__,
+                                                                   '，源自字段 ', str(member_name)])
+                        return result
+
+                elif isinstance(member_type, basestring):
+                    if 0 == member_type.find('regex:'):
+                        if re.match(member_type[6:], set_(member_name)) is None:
+                            result['state'] = Common.exchange_state(41209)
+                            return result
+
+                else:
+                    result['state'] = Common.exchange_state(41206)
+                    result['state']['sub']['zh-cn'] = ''.join([result['state']['sub']['zh-cn'], '，不支持的类型 ',
+                                                               str(member_type)])
                     return result
 
             if member_range is not None:
