@@ -84,6 +84,14 @@ class TestCheck(unittest.TestCase):
         }
         self.assertEqual('41209', Check.previewing(form_rules, form)['state']['sub']['code'])
 
+        form_rules = [
+            (basestring, 'email', (8, 64))
+        ]
+        form = {
+            'email': 'a@b.c'
+        }
+        self.assertEqual('41203', Check.previewing(form_rules, form)['state']['sub']['code'])
+
 
 if __name__ == '__main__':
     unittest.main()

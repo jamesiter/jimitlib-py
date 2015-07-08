@@ -102,7 +102,12 @@ class Check(object):
                                                                    str(member_range)])
                         return result
 
-                    if not member_range[0] <= set_[member_name] <= member_range[1]:
+                    if member_type in [basestring, str, unicode]:
+                        me = set_[member_name].__len__()
+                    else:
+                        me = set_[member_name]
+
+                    if not member_range[0] <= me <= member_range[1]:
                         result['state'] = Common.exchange_state(41203)
                         result['state']['sub']['zh-cn'] = ''.join([result['state']['sub']['zh-cn'], '，预期取值范围 ',
                                                                    str(member_range), '，收到 ',
