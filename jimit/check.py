@@ -41,8 +41,15 @@ class Check(object):
 
             member_type = None
             member_range = None
+            member_need = True
 
-            if item.__len__() == 3:
+            if item.__len__() == 4:
+                member_type = item[0]
+                member_name = item[1]
+                member_range = item[2]
+                member_need = item[3]
+
+            elif item.__len__() == 3:
                 member_type = item[0]
                 member_name = item[1]
                 member_range = item[2]
@@ -67,9 +74,13 @@ class Check(object):
                 return result
 
             if member_name not in set_:
-                result['state'] = Common.exchange_state(41201)
-                result['state']['sub']['zh-cn'] = ''.join([result['state']['sub']['zh-cn'], str(member_name)])
-                return result
+                if member_need:
+                    result['state'] = Common.exchange_state(41201)
+                    result['state']['sub']['zh-cn'] = ''.join([result['state']['sub']['zh-cn'], str(member_name)])
+                    return result
+
+                else:
+                    return result
 
             if member_type is not None:
                 if isinstance(member_type, type):
