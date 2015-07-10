@@ -97,12 +97,6 @@ class Check(object):
                                                                '，源自字段 ', str(member_name)])
                     return result
 
-                else:
-                    result['state'] = Common.exchange_state(41206)
-                    result['state']['sub']['zh-cn'] = ''.join([result['state']['sub']['zh-cn'], '，不支持的类型 ',
-                                                               str(member_type)])
-                    return result
-
             if member_range is not None:
                 if isinstance(member_range, tuple):
                     if member_range.__len__() < 2:
