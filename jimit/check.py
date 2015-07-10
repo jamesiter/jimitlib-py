@@ -83,20 +83,19 @@ class Check(object):
                     return result
 
             if member_type is not None:
-                if isinstance(member_type, type):
-                    if not isinstance(set_[member_name], member_type):
-                        result['state'] = Common.exchange_state(41202)
-                        result['state']['sub']['zh-cn'] = ''.join([result['state']['sub']['zh-cn'], '，预期类型 ',
-                                                                   member_type.__name__, '，收到 ',
-                                                                   type(set_[member_name]).__name__,
-                                                                   '，源自字段 ', str(member_name)])
-                        return result
-
-                elif isinstance(member_type, basestring):
+                if isinstance(member_type, basestring):
                     if 0 == member_type.find('regex:'):
                         if re.match(member_type[6:], set_[member_name]) is None:
                             result['state'] = Common.exchange_state(41209)
                             return result
+
+                elif not isinstance(set_[member_name], member_type):
+                    result['state'] = Common.exchange_state(41202)
+                    result['state']['sub']['zh-cn'] = ''.join([result['state']['sub']['zh-cn'], '，预期类型 ',
+                                                               member_type.__name__, '，收到 ',
+                                                               type(set_[member_name]).__name__,
+                                                               '，源自字段 ', str(member_name)])
+                    return result
 
                 else:
                     result['state'] = Common.exchange_state(41206)
@@ -113,7 +112,7 @@ class Check(object):
                                                                    str(member_range)])
                         return result
 
-                    if member_type in [basestring, str, unicode]:
+                    if member_type in [basestring, str, unicode, tuple, list, dict]:
                         me = set_[member_name].__len__()
                     else:
                         me = set_[member_name]
