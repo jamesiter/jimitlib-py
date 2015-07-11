@@ -35,7 +35,7 @@ from net_utils import (
     NetUtils
 )
 
-__version__ = "0.29"
+__version__ = "0.30"
 
 __all__ = [
     'Common', 'Check', 'Convert', 'JITime', 'Router', 'Security', 'NetUtils'

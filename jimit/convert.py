@@ -7,6 +7,7 @@ __contact__ = 'james.iter.cn@gmail.com'
 __copyright__ = '(c) 2015 by James Iter.'
 
 import decimal
+import json
 
 from common import *
 
@@ -35,3 +36,10 @@ class Convert(object):
 
         result['j_sql'] = j_sql
         return result
+
+    @staticmethod
+    def dumps(func):
+        def _dumps(*args, **kwargs):
+            ret = func(*args, **kwargs)
+            return json.dumps(ret)
+        return _dumps
