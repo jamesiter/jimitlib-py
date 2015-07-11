@@ -41,5 +41,5 @@ class Convert(object):
     def dumps(func):
         def _dumps(*args, **kwargs):
             ret = func(*args, **kwargs)
-            return json.dumps(ret)
+            return json.dumps(ret, ensure_ascii=False)
         return _dumps
