@@ -100,6 +100,14 @@ class TestCheck(unittest.TestCase):
         }
         self.assertEqual('200', Check.previewing(form_rules, form)['state']['code'])
 
+        form_rules = [
+            ((int, long), 'number', (0, 100))
+        ]
+        form = {
+            'number': 10
+        }
+        self.assertEqual('200', Check.previewing(form_rules, form)['state']['code'])
+
 
 if __name__ == '__main__':
     unittest.main()
