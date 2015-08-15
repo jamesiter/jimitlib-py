@@ -61,7 +61,7 @@ class TestCommons(unittest.TestCase):
 
     def test_generate_random_code(self):
         ret = Common.generate_random_code(100)
-        self.assertEqual('200', ret['state']['code'])
+        self.assertEqual(100, ret.__len__())
 
 if __name__ == '__main__':
     unittest.main()

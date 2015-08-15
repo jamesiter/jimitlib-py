@@ -12,6 +12,7 @@ import socket
 import os
 import hashlib
 import random
+import json
 from state_code import *
 import jimit as ji
 
@@ -171,10 +172,7 @@ class Common(object):
 
         ret = ji.Check.previewing(args_rules, locals())
         if '200' != ret['state']['code']:
-            return ret
-
-        result = dict()
-        result['state'] = Common.exchange_state(20000)
+            raise Exception(json.dumps(ret))
 
         upper = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
                  'U', 'V', 'W', 'X', 'Y', 'Z']
@@ -199,10 +197,10 @@ class Common(object):
         if spechars:
             character_codes.extend(special_characters)
 
-        result['random_code'] = ''
+        random_code = ''
 
         while length:
             length -= 1
-            result['random_code'] = ''.join([result['random_code'], random.choice(character_codes)])
+            random_code = ''.join([random_code, random.choice(character_codes)])
 
-        return result
+        return random_code

@@ -35,12 +35,11 @@ class Security(object):
             return ret
 
         if salt == '':
-            ret = Common.generate_random_code(length=32)
+            random_code = Common.generate_random_code(length=32)
             if '200' != ret['state']['code']:
                 return ret
 
-            salt = ret['random_code']
-            del ret['random_code']
+            salt = random_code
         else:
             salt = salt
 
