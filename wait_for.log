@@ -1,3 +1,6 @@
+Date 2015-08-19
+    - 加入JITError、PreviewingError私有异常类型
+
 Date 2015-07-19
     - 希望支持多类型判断，比如(int, long)之类
 

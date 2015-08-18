@@ -35,8 +35,13 @@ from net_utils import (
     NetUtils
 )
 
-__version__ = "0.34"
+from exceptions import (
+    JITError,
+    PreviewingError
+)
+
+__version__ = "0.35"
 
 __all__ = [
-    'Common', 'Check', 'Convert', 'JITime', 'Router', 'Security', 'NetUtils'
+    'Common', 'Check', 'Convert', 'JITime', 'Router', 'Security', 'NetUtils', 'JITError', 'PreviewingError'
 ]
