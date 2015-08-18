@@ -32,12 +32,12 @@ class Security(object):
 
         ret = ji.Check.previewing(args_rules, locals())
         if '200' != ret['state']['code']:
-            return ret
+            raise ji.JITError(json.dumps(ret))
 
         if salt == '':
             random_code = Common.generate_random_code(length=32)
             if '200' != ret['state']['code']:
-                return ret
+                raise ji.JITError(json.dumps(ret))
 
             salt = random_code
         else:
@@ -62,7 +62,7 @@ class Security(object):
             tmp_quality -= 1
 
         ret['password_hash'] = '$'.join(['ji_pbkdf2', algorithm, str(quality), salt, password_hash])
-        return ret
+        return ret['password_hash']
 
     @staticmethod
     def ji_pbkdf2_check(password='', password_hash=''):
@@ -82,7 +82,7 @@ class Security(object):
 
         ret = ji.Check.previewing(args_rules, locals())
         if '200' != ret['state']['code']:
-            return ret
+            raise ji.JITError(json.dumps(ret))
 
         method = password_hash_segment[0]
         algorithm = password_hash_segment[1]
@@ -91,10 +91,10 @@ class Security(object):
 
         ret = Security.ji_pbkdf2(password=password, quality=quality, algorithm=algorithm, salt=salt)
         if '200' != ret['state']['code']:
-            return ret
+            raise ji.JITError(json.dumps(ret))
 
         if ret['password_hash'] == password_hash:
             ret['auth_pass'] = True
 
         del ret['password_hash']
-        return ret
+        return ret['auth_pass']

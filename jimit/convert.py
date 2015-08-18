@@ -32,10 +32,10 @@ class Convert(object):
         except Exception, e:
             result['state'] = Common.exchange_state(50003)
             result['state']['sub']['detail'] = e.message
-            return result
+            raise ji.JITError(json.dumps(result))
 
         result['j_sql'] = j_sql
-        return result
+        return result['j_sql']
 
     @staticmethod
     def dumps(func):

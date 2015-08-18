@@ -31,12 +31,12 @@ class Common(object):
         """
         if not isinstance(code, int):
             result = Common.exchange_state(50001)
-            return result
+            raise ji.JITError(json.dumps(result))
 
         trunk_code = int(code / 100)
         if str(trunk_code) not in index_state['trunk']:
             result = Common.exchange_state(50002)
-            return result
+            raise ji.JITError(json.dumps(result))
 
         result = copy.copy(index_state['trunk'][(str(trunk_code))])
 
@@ -114,7 +114,7 @@ class Common(object):
             result['state'] = Common.exchange_state(40401)
             result['state']['sub']['zh-cn'] = ''.join([result['state']['sub']['zh-cn'],
                                                        '，目标"', file_path, '"不是一个有效文件'])
-            return result
+            raise ji.JITError(json.dumps(result))
 
         with open(file_path, 'rb') as f:
             try:
@@ -125,9 +125,9 @@ class Common(object):
                 result['state'] = Common.exchange_state(50004)
                 result['state']['sub']['zh-cn'] = ''.join([result['state']['sub']['zh-cn'],
                                                            '，详细信息: ', e.message])
-                return result
+                raise ji.JITError(json.dumps(result))
 
-        return result
+        return result['sha1']
 
     @staticmethod
     def calc_sha1_by_fd(fd):
@@ -147,11 +147,11 @@ class Common(object):
             result['state'] = Common.exchange_state(50004)
             result['state']['sub']['zh-cn'] = ''.join([result['state']['sub']['zh-cn'],
                                                        '，详细信息: ', e.message])
-            return result
+            raise ji.JITError(json.dumps(result))
         finally:
             fd.seek(0, 0)
 
-        return result
+        return result['sha1']
 
     @staticmethod
     def generate_random_code(length, letter_form='mix', numeral=True, spechars=False):
@@ -172,7 +172,7 @@ class Common(object):
 
         ret = ji.Check.previewing(args_rules, locals())
         if '200' != ret['state']['code']:
-            raise Exception(json.dumps(ret))
+            raise ji.JITError(json.dumps(ret))
 
         upper = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
                  'U', 'V', 'W', 'X', 'Y', 'Z']
