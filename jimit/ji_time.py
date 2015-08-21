@@ -11,6 +11,9 @@ import datetime
 
 
 class JITime(object):
+    """
+    力图简单、直接，故把常用时间输出封装为静态函数
+    """
 
     def __init__(self):
         pass
@@ -73,7 +76,7 @@ class JITime(object):
         :param separator: 日期年、月、日之间的分隔符，默认为'-'
         :return: 向前偏移n日的日期(jimit.JITime.the_day_before_today(20) --> '2015-05-29')
         """
-        return JITime.the_day(datetime.date.today()-datetime.timedelta(days=offset), separator)
+        return JITime.the_day(datetime.date.today() - datetime.timedelta(days=offset), separator)
 
     @staticmethod
     def the_day_after_today(offset=0, separator='-'):
@@ -83,7 +86,27 @@ class JITime(object):
         :param separator: 日期年、月、日之间的间隔符，默认值'-'
         :return: 向后偏移n日的日期(jimit.JITime.the_day_after_today(20) --> '2015-07-08')
         """
-        return JITime.the_day(datetime.date.today()+datetime.timedelta(days=offset), separator)
+        return JITime.the_day(datetime.date.today() + datetime.timedelta(days=offset), separator)
+
+    @staticmethod
+    def the_month_before_this_month_ts(offset=0):
+        """
+        :rtype : int
+        :param offset: 以月为单位，像前偏移n值的月期
+        :return: 像前偏移n月的月初时间戳
+        """
+        return int((datetime.date.today().replace(day=1) - datetime.timedelta(days=offset)).replace(
+            day=1).strftime('%s'))
+
+    @staticmethod
+    def the_month_after_this_month_ts(offset=0):
+        """
+        :rtype : int
+        :param offset: 以月为单位，像后偏移n值的月期
+        :return: 像后偏移n月的月初时间戳
+        """
+        return int((datetime.date.today().replace(day=1) + datetime.timedelta(days=offset)).replace(
+            day=1).strftime('%s'))
 
     @staticmethod
     def week():

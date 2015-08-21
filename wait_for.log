@@ -1,3 +1,6 @@
+Date 2015-08-21
+    - 希望实现获取指定月月初时间戳
+
 Date 2015-08-19
     - 加入JITError、PreviewingError私有异常类型
 
