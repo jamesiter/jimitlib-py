@@ -120,14 +120,12 @@ class Common(object):
             try:
                 sha1_obj = hashlib.sha1()
                 sha1_obj.update(f.read())
-                result['sha1'] = sha1_obj.hexdigest()
+                return sha1_obj.hexdigest()
             except Exception, e:
                 result['state'] = Common.exchange_state(50004)
                 result['state']['sub']['zh-cn'] = ''.join([result['state']['sub']['zh-cn'],
                                                            '，详细信息: ', e.message])
                 raise ji.JITError(json.dumps(result))
-
-        return result['sha1']
 
     @staticmethod
     def calc_sha1_by_fd(fd):
@@ -142,7 +140,7 @@ class Common(object):
         try:
             sha1_obj = hashlib.sha1()
             sha1_obj.update(fd.read())
-            result['sha1'] = sha1_obj.hexdigest()
+            sha1 = sha1_obj.hexdigest()
         except Exception, e:
             result['state'] = Common.exchange_state(50004)
             result['state']['sub']['zh-cn'] = ''.join([result['state']['sub']['zh-cn'],
@@ -151,7 +149,7 @@ class Common(object):
         finally:
             fd.seek(0, 0)
 
-        return result['sha1']
+        return sha1
 
     @staticmethod
     def generate_random_code(length, letter_form='mix', numeral=True, spechars=False):
@@ -170,9 +168,7 @@ class Common(object):
             (bool, 'spechars')
         ]
 
-        ret = ji.Check.previewing(args_rules, locals())
-        if '200' != ret['state']['code']:
-            raise ji.JITError(json.dumps(ret))
+        ji.Check.previewing(args_rules, locals())
 
         upper = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
                  'U', 'V', 'W', 'X', 'Y', 'Z']

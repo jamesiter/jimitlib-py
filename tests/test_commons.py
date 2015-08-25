@@ -52,12 +52,11 @@ class TestCommons(unittest.TestCase):
     def test_calc_sha1_by_file(self):
         import os, hashlib
         file_path = __file__
-        ret = Common.calc_sha1_by_file(file_path)
-        self.assertEqual('200', ret['state']['code'])
+        sha1 = Common.calc_sha1_by_file(file_path)
         with open(file_path, 'rb') as f:
             sha1_obj = hashlib.sha1()
             sha1_obj.update(f.read())
-            self.assertEqual(ret['sha1'], sha1_obj.hexdigest())
+            self.assertEqual(sha1, sha1_obj.hexdigest())
 
     def test_generate_random_code(self):
         ret = Common.generate_random_code(100)

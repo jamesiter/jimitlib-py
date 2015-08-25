@@ -35,8 +35,8 @@ class Check(object):
         for item in members:
             if not isinstance(item, tuple):
                 result['state'] = Common.exchange_state(41204)
-                result['state']['sub']['zh-cn'] = ''.join([result['state']['sub']['zh-cn'], '，收到 ',
-                                                           type(item).__name__, '，源自 ', str(item)])
+                result['state']['sub']['zh-cn'] = ''.join([result['state']['sub']['zh-cn'], u'，收到 ',
+                                                           type(item).__name__, u'，源自 ', str(item)])
                 raise ji.PreviewingError(json.dumps(result))
 
             member_type = None
@@ -63,14 +63,14 @@ class Check(object):
 
             else:
                 result['state'] = Common.exchange_state(41205)
-                result['state']['sub']['zh-cn'] = ''.join([result['state']['sub']['zh-cn'], '，收到 ',
-                                                           str(item.__len__()), '，源自 ', str(item)])
+                result['state']['sub']['zh-cn'] = ''.join([result['state']['sub']['zh-cn'], u'，收到 ',
+                                                           str(item.__len__()), u'，源自 ', str(item)])
                 raise ji.PreviewingError(json.dumps(result))
 
             if type(member_name).__name__ != 'str':
                 result['state'] = Common.exchange_state(41207)
-                result['state']['sub']['zh-cn'] = ''.join([result['state']['sub']['zh-cn'], '，收到 ',
-                                                           type(member_name).__name__, '，源自 ', str(item)])
+                result['state']['sub']['zh-cn'] = ''.join([result['state']['sub']['zh-cn'], u'，收到 ',
+                                                           type(member_name).__name__, u'，源自 ', str(item)])
                 raise ji.PreviewingError(json.dumps(result))
 
             if member_name not in set_:
@@ -91,18 +91,18 @@ class Check(object):
 
                 elif not isinstance(set_[member_name], member_type):
                     result['state'] = Common.exchange_state(41202)
-                    result['state']['sub']['zh-cn'] = ''.join([result['state']['sub']['zh-cn'], '，预期类型 ',
-                                                               member_type.__name__, '，收到 ',
+                    result['state']['sub']['zh-cn'] = ''.join([result['state']['sub']['zh-cn'], u'，预期类型 ',
+                                                               member_type.__name__, u'，收到 ',
                                                                type(set_[member_name]).__name__,
-                                                               '，源自字段 ', str(member_name)])
+                                                               u'，源自字段 ', str(member_name)])
                     raise ji.PreviewingError(json.dumps(result))
 
             if member_range is not None:
                 if isinstance(member_range, tuple):
                     if member_range.__len__() < 2:
                         result['state'] = Common.exchange_state(41206)
-                        result['state']['sub']['zh-cn'] = ''.join([result['state']['sub']['zh-cn'], '，预期2个元素，收到 ',
-                                                                   str(member_range.__len__()), '，源自 ',
+                        result['state']['sub']['zh-cn'] = ''.join([result['state']['sub']['zh-cn'], u'，预期2个元素，收到 ',
+                                                                   str(member_range.__len__()), u'，源自 ',
                                                                    str(member_range)])
                         raise ji.PreviewingError(json.dumps(result))
 
@@ -113,29 +113,29 @@ class Check(object):
 
                     if not member_range[0] <= me <= member_range[1]:
                         result['state'] = Common.exchange_state(41203)
-                        result['state']['sub']['zh-cn'] = ''.join([result['state']['sub']['zh-cn'], '，预期取值范围 ',
-                                                                   str(member_range), '，收到 ',
+                        result['state']['sub']['zh-cn'] = ''.join([result['state']['sub']['zh-cn'], u'，预期取值范围 ',
+                                                                   str(member_range), u'，收到 ',
                                                                    str(set_[member_name])])
                         raise ji.PreviewingError(json.dumps(result))
 
                 elif isinstance(member_range, list):
                     if member_range.__len__() < 1:
                         result['state'] = Common.exchange_state(41206)
-                        result['state']['sub']['zh-cn'] = ''.join([result['state']['sub']['zh-cn'], '，不可少于1个，收到 ',
-                                                                   str(member_range.__len__()), '，源自 ',
+                        result['state']['sub']['zh-cn'] = ''.join([result['state']['sub']['zh-cn'], u'，不可少于1个，收到 ',
+                                                                   str(member_range.__len__()), u'，源自 ',
                                                                    str(member_range)])
                         raise ji.PreviewingError(json.dumps(result))
 
                     if set_[member_name] not in member_range:
                         result['state'] = Common.exchange_state(41203)
-                        result['state']['sub']['zh-cn'] = ''.join([result['state']['sub']['zh-cn'], '，预期取值范围 ',
-                                                                   str(member_range), '，收到 ',
+                        result['state']['sub']['zh-cn'] = ''.join([result['state']['sub']['zh-cn'], u'，预期取值范围 ',
+                                                                   str(member_range), u'，收到 ',
                                                                    str(set_[member_name])])
                         raise ji.PreviewingError(json.dumps(result))
 
                 else:
                     result['state'] = Common.exchange_state(41206)
-                    result['state']['sub']['zh-cn'] = ''.join([result['state']['sub']['zh-cn'], '，不支持的类型 ',
+                    result['state']['sub']['zh-cn'] = ''.join([result['state']['sub']['zh-cn'], u'，不支持的类型 ',
                                                                type(member_range).__name__])
                     raise ji.PreviewingError(json.dumps(result))
 

@@ -9,6 +9,8 @@ __copyright__ = '(c) 2015 by James Iter.'
 import sys
 sys.path.append("..")
 from jimit.check import Check
+import jimit as ji
+import json
 import unittest
 
 
@@ -34,7 +36,11 @@ class TestCheck(unittest.TestCase):
         ]
         form = {
         }
-        self.assertEqual('41201', Check.previewing(form_rules, form)['state']['sub']['code'])
+        try:
+            Check.previewing(form_rules, form)
+        except ji.PreviewingError, e:
+            ret = json.loads(e.message)
+        self.assertEqual('41201', ret['state']['sub']['code'])
 
         form_rules = [
             (str, 'k')
@@ -42,7 +48,11 @@ class TestCheck(unittest.TestCase):
         form = {
             'k': 123
         }
-        self.assertEqual('41202', Check.previewing(form_rules, form)['state']['sub']['code'])
+        try:
+            Check.previewing(form_rules, form)
+        except ji.PreviewingError, e:
+            ret = json.loads(e.message)
+        self.assertEqual('41202', ret['state']['sub']['code'])
 
         form_rules = [
             (str, 'k', ['F', 'M'])
@@ -50,7 +60,11 @@ class TestCheck(unittest.TestCase):
         form = {
             'k': 'v'
         }
-        self.assertEqual('41203', Check.previewing(form_rules, form)['state']['sub']['code'])
+        try:
+            Check.previewing(form_rules, form)
+        except ji.PreviewingError, e:
+            ret = json.loads(e.message)
+        self.assertEqual('41203', ret['state']['sub']['code'])
 
         form_rules = [
             "str, 'k', ['F', 'M']"
@@ -58,7 +72,11 @@ class TestCheck(unittest.TestCase):
         form = {
             'k': 'v'
         }
-        self.assertEqual('41204', Check.previewing(form_rules, form)['state']['sub']['code'])
+        try:
+            Check.previewing(form_rules, form)
+        except Exception, e:
+            ret = json.loads(e.message)
+        self.assertEqual('41204', ret['state']['sub']['code'])
 
         form_rules = [
             (str, )
@@ -66,7 +84,11 @@ class TestCheck(unittest.TestCase):
         form = {
             'k': 'v'
         }
-        self.assertEqual('41207', Check.previewing(form_rules, form)['state']['sub']['code'])
+        try:
+            Check.previewing(form_rules, form)
+        except ji.PreviewingError, e:
+            ret = json.loads(e.message)
+        self.assertEqual('41207', ret['state']['sub']['code'])
 
         form_rules = [
             ('regex:^[a-z0-9]+([._][a-z0-9]+)*@[a-z0-9]+([-][a-z0-9]+)*\.[a-z]+$', 'email')
@@ -74,7 +96,11 @@ class TestCheck(unittest.TestCase):
         form = {
             'email': 'james.iter.cn@gmail.com'
         }
-        self.assertEqual('200', Check.previewing(form_rules, form)['state']['code'])
+        try:
+            ret = Check.previewing(form_rules, form)
+        except ji.PreviewingError, e:
+            ret = json.loads(e.message)
+        self.assertEqual('200', ret['state']['code'])
 
         form_rules = [
             ('regex:^[a-z0-9]+([._][a-z0-9]+)*@[a-z0-9]+([-][a-z0-9]+)*\.[a-z]+$', 'email')
@@ -82,7 +108,11 @@ class TestCheck(unittest.TestCase):
         form = {
             'email': '.james.iter.cn@gmail.com'
         }
-        self.assertEqual('41209', Check.previewing(form_rules, form)['state']['sub']['code'])
+        try:
+            Check.previewing(form_rules, form)
+        except ji.PreviewingError, e:
+            ret = json.loads(e.message)
+        self.assertEqual('41209', ret['state']['sub']['code'])
 
         form_rules = [
             (basestring, 'email', (8, 64))
@@ -90,7 +120,11 @@ class TestCheck(unittest.TestCase):
         form = {
             'email': 'a@b.c'
         }
-        self.assertEqual('41203', Check.previewing(form_rules, form)['state']['sub']['code'])
+        try:
+            Check.previewing(form_rules, form)
+        except ji.PreviewingError, e:
+            ret = json.loads(e.message)
+        self.assertEqual('41203', ret['state']['sub']['code'])
 
         form_rules = [
             (basestring, 'email', (8, 64), False)
@@ -98,7 +132,11 @@ class TestCheck(unittest.TestCase):
         form = {
             'xmail': 'a@b.c'
         }
-        self.assertEqual('200', Check.previewing(form_rules, form)['state']['code'])
+        try:
+            ret = Check.previewing(form_rules, form)
+        except ji.PreviewingError, e:
+            ret = json.loads(e.message)
+        self.assertEqual('200', ret['state']['code'])
 
         form_rules = [
             ((int, long), 'number', (0, 100))
@@ -106,7 +144,11 @@ class TestCheck(unittest.TestCase):
         form = {
             'number': 10
         }
-        self.assertEqual('200', Check.previewing(form_rules, form)['state']['code'])
+        try:
+            Check.previewing(form_rules, form)
+        except ji.PreviewingError, e:
+            ret = json.loads(e.message)
+        self.assertEqual('200', ret['state']['code'])
 
 
 if __name__ == '__main__':

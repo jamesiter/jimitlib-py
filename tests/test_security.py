@@ -21,9 +21,9 @@ class TestSecurity(unittest.TestCase):
 
     def test_ji_pbkdf2(self):
         ret = Security.ji_pbkdf2('password')
-        self.assertEqual('200', ret['state']['code'])
+        self.assertIsInstance(ret, basestring)
 
     def test_ji_pbkdf2_check(self):
         ji_pbkdf2_ret = Security.ji_pbkdf2('password')
-        ret = Security.ji_pbkdf2_check(password='password', password_hash=ji_pbkdf2_ret['password_hash'])
-        self.assertEqual(True, ret.get('auth_pass', False))
+        ret = Security.ji_pbkdf2_check(password='password', password_hash=ji_pbkdf2_ret)
+        self.assertEqual(True, ret)

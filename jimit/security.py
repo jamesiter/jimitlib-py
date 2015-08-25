@@ -30,16 +30,10 @@ class Security(object):
             (basestring, 'salt')
         ]
 
-        ret = ji.Check.previewing(args_rules, locals())
-        if '200' != ret['state']['code']:
-            raise ji.JITError(json.dumps(ret))
+        ji.Check.previewing(args_rules, locals())
 
         if salt == '':
-            random_code = Common.generate_random_code(length=32)
-            if '200' != ret['state']['code']:
-                raise ji.JITError(json.dumps(ret))
-
-            salt = random_code
+            salt = Common.generate_random_code(length=32)
         else:
             salt = salt
 
@@ -61,8 +55,7 @@ class Security(object):
             password_hash = hash_method(password_hash).hexdigest()
             tmp_quality -= 1
 
-        ret['password_hash'] = '$'.join(['ji_pbkdf2', algorithm, str(quality), salt, password_hash])
-        return ret['password_hash']
+        return '$'.join(['ji_pbkdf2', algorithm, str(quality), salt, password_hash])
 
     @staticmethod
     def ji_pbkdf2_check(password='', password_hash=''):
@@ -80,21 +73,14 @@ class Security(object):
             (int, 'password_hash_segment_length', [5])
         ]
 
-        ret = ji.Check.previewing(args_rules, locals())
-        if '200' != ret['state']['code']:
-            raise ji.JITError(json.dumps(ret))
+        ji.Check.previewing(args_rules, locals())
 
         method = password_hash_segment[0]
         algorithm = password_hash_segment[1]
         quality = int(password_hash_segment[2])
         salt = password_hash_segment[3]
 
-        ret = Security.ji_pbkdf2(password=password, quality=quality, algorithm=algorithm, salt=salt)
-        if '200' != ret['state']['code']:
-            raise ji.JITError(json.dumps(ret))
+        if password_hash == Security.ji_pbkdf2(password=password, quality=quality, algorithm=algorithm, salt=salt):
+            return True
 
-        if ret['password_hash'] == password_hash:
-            ret['auth_pass'] = True
-
-        del ret['password_hash']
-        return ret['auth_pass']
+        return False
