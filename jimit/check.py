@@ -113,8 +113,8 @@ class Check(object):
 
                     if not member_range[0] <= me <= member_range[1]:
                         result['state'] = Common.exchange_state(41203)
-                        result['state']['sub']['zh-cn'] = ''.join([result['state']['sub']['zh-cn'], u'，预期取值范围 ',
-                                                                   str(member_range), u'，收到 ',
+                        result['state']['sub']['zh-cn'] = ''.join([member_name, result['state']['sub']['zh-cn'],
+                                                                   u'，预期取值范围 ', str(member_range), u'，收到 ',
                                                                    str(set_[member_name])])
                         raise ji.PreviewingError(json.dumps(result))
 
@@ -128,8 +128,8 @@ class Check(object):
 
                     if set_[member_name] not in member_range:
                         result['state'] = Common.exchange_state(41203)
-                        result['state']['sub']['zh-cn'] = ''.join([result['state']['sub']['zh-cn'], u'，预期取值范围 ',
-                                                                   str(member_range), u'，收到 ',
+                        result['state']['sub']['zh-cn'] = ''.join([member_name, result['state']['sub']['zh-cn'],
+                                                                   u'，预期取值范围 ', str(member_range), u'，收到 ',
                                                                    str(set_[member_name])])
                         raise ji.PreviewingError(json.dumps(result))
 
