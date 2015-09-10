@@ -92,7 +92,7 @@ class Check(object):
                 elif not isinstance(set_[member_name], member_type):
                     result['state'] = Common.exchange_state(41202)
                     result['state']['sub']['zh-cn'] = ''.join([result['state']['sub']['zh-cn'], u'，预期类型 ',
-                                                               member_type.__name__, u'，收到 ',
+                                                               str(member_type), u'，收到 ',
                                                                type(set_[member_name]).__name__,
                                                                u'，源自字段 ', str(member_name)])
                     raise ji.PreviewingError(json.dumps(result))
