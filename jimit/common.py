@@ -94,7 +94,7 @@ class Common(object):
                 return 'production'
 
         if according_to_hostname:
-            environment = exchange_env(Common.get_hostname())
+            environment = exchange_env(str(Common.get_hostname()))  # get_hostname返回的basestring类型没有lower方法
         else:
             environment = exchange_env(os.environ.get('JI_ENVIRONMENT', ''))
 
