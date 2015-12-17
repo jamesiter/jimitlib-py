@@ -67,7 +67,7 @@ class Check(object):
                                                            str(item.__len__()), u'，源自 ', str(item)])
                 raise ji.PreviewingError(json.dumps(result))
 
-            if type(member_name).__name__ != 'str':
+            if not isinstance(member_name, basestring):
                 result['state'] = Common.exchange_state(41207)
                 result['state']['sub']['zh-cn'] = ''.join([result['state']['sub']['zh-cn'], u'，收到 ',
                                                            type(member_name).__name__, u'，源自 ', str(item)])
