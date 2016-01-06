@@ -95,8 +95,14 @@ class JITime(object):
         :param offset: 以月为单位，像前偏移n值的月期
         :return: 像前偏移n月的月初时间戳
         """
-        return int((datetime.date.today().replace(day=1) - datetime.timedelta(days=offset)).replace(
-            day=1).strftime('%s'))
+        today_date = datetime.date.today()
+        offset_year = offset / 12
+        offset_month = offset % 12
+        if today_date.month == offset_month:
+            offset_month -= 12
+            offset_year += 1
+        return int(today_date.replace(year=today_date.year - offset_year, month=today_date.month - offset_month,
+                                      day=1).strftime('%s'))
 
     @staticmethod
     def the_month_after_this_month_ts(offset=0):
@@ -105,8 +111,12 @@ class JITime(object):
         :param offset: 以月为单位，像后偏移n值的月期
         :return: 像后偏移n月的月初时间戳
         """
-        return int((datetime.date.today().replace(day=1) + datetime.timedelta(days=offset)).replace(
-            day=1).strftime('%s'))
+        today_date = datetime.date.today()
+        offset += today_date.month
+        offset_year = offset / 12
+        offset_month = offset % 12
+        return int(today_date.replace(year=today_date.year + offset_year, month=offset_month,
+                                      day=1).strftime('%s'))
 
     @staticmethod
     def week():
