@@ -40,7 +40,7 @@ from exceptions import (
     PreviewingError
 )
 
-__version__ = "0.44"
+__version__ = "0.45"
 
 __all__ = [
     'Common', 'Check', 'Convert', 'JITime', 'Router', 'Security', 'NetUtils', 'JITError', 'PreviewingError'
