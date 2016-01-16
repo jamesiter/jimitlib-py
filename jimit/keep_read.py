@@ -35,12 +35,12 @@ class KeepRead(object):
         KeepRead.launch()
     """
     # Example:
-    # {'/var/log/messages': 2341, '/var/log/nginx/error_log': 3521}
+    # {"/var/log/messages": 2341, "/var/log/nginx/error_log": 3521}
     cursor = {}
     # Example:
     # [
-    #   {'path': '/var/log/messages', 'start_position': 0},
-    #   {'path': '/var/log/nginx/error_log', 'start_position': 0}
+    #   {"path": "/var/log/messages", "start_position": 0},
+    #   {"path": "/var/log/nginx/error_log", "start_position": 0}
     # ]
     config = []
     config_path = '/etc/monitor_log.conf'
