@@ -43,6 +43,7 @@ class KeepRead(object):
     #   {"path": "/var/log/nginx/error_log", "start_position": 0}
     # ]
     config = []
+    log_file_ino = {}
     config_path = '/etc/monitor_log.conf'
     cursor_path = '/var/lib/misc/cursor.ml'
     exit_flag = False
@@ -90,24 +91,79 @@ class KeepRead(object):
     def get_exit_flag(cls):
         return cls.exit_flag
 
-    def monitor(self):
-        with open(self.log_path, 'rU') as f:
+    @classmethod
+    # ino for index number
+    def watch_ino(cls):
+        cls.increment_thread_counter(1)
+        while True:
+            if cls.get_exit_flag():
+                cls.increment_thread_counter(-1)
+                return
+
+            try:
+                for item in KeepRead.config:
+                    st_ino = os.stat(item['path']).st_ino
+                    if item['path'] not in cls.log_file_ino:
+                        cls.log_file_ino[item['path']] = dict()
+                        cls.log_file_ino[item['path']]['ino_changed'] = False
+                        cls.log_file_ino[item['path']]['last'] = st_ino
+
+                    if cls.log_file_ino[item['path']]['last'] != st_ino:
+                        cls.log_file_ino[item['path']]['ino_changed'] = True
+                        cls.log_file_ino[item['path']]['last'] = st_ino
+
+            except OSError:
+                pass
+            except:
+                cls.increment_thread_counter(-1)
+
+            time.sleep(1)
+
+    @classmethod
+    def get_ino_changed(cls, path=None):
+        if path not in cls.log_file_ino:
+            return False
+        return cls.log_file_ino[path]['ino_changed']
+
+    @classmethod
+    def reset_ino_changed(cls, path=None):
+        cls.log_file_ino[path]['ino_changed'] = False
+
+    def monitor(self, replace=False):
+        # 线程替换时不做增量统计
+        if not replace:
             self.increment_thread_counter(1)
-            offset = self.get_cursor(log_path=self.log_path)
-            if offset > 0:
-                f.seek(offset)
-            while True:
-                if self.get_exit_flag():
-                    self.increment_thread_counter(-1)
-                    break
+        # 如果被监控的文件不存在时,则一直循环尝试打开
+        while True:
+            try:
+                with open(self.log_path, 'rU') as f:
+                    offset = self.get_cursor(log_path=self.log_path)
+                    if offset > 0:
+                        f.seek(offset)
+                    while True:
+                        if self.get_exit_flag():
+                            self.increment_thread_counter(-1)
+                            return
 
-                self.line = f.readline()
-                if self.get_cursor(log_path=self.log_path) == f.tell():
-                    time.sleep(1)
-                    continue
+                        self.line = f.readline()
+                        if self.get_cursor(log_path=self.log_path) == f.tell():
+                            if self.get_ino_changed(self.log_path):
+                                self.reset_ino_changed(self.log_path)
+                                kr = KeepRead()
+                                kr.log_path = self.log_path
+                                KeepRead.cursor[kr.log_path] = 0
+                                return thread.start_new_thread(kr.monitor, (True, ))
 
-                self.set_cursor(log_path=self.log_path, offset=f.tell())
-                self.dispose()
+                            time.sleep(1)
+                            continue
+
+                        self.set_cursor(log_path=self.log_path, offset=f.tell())
+                        self.dispose()
+
+            except IOError:
+                time.sleep(1)
+            except:
+                self.increment_thread_counter(-1)
 
     def dispose(self):
         KeepRead.filtrator(self.line)
@@ -123,6 +179,7 @@ class KeepRead(object):
         signal.signal(signal.SIGINT, KeepRead.signal_handle)
         KeepRead.load_config()
         KeepRead.restore_cursor()
+        thread.start_new_thread(KeepRead.watch_ino, ())
         for item in KeepRead.config:
             kr = KeepRead()
             kr.log_path = item['path']
