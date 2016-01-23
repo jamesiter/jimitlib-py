@@ -32,9 +32,9 @@ class TransactionSerialNumber(object):
         self.date_time = JITime.now_date_time(date_separator='', time_separator='', dt_separator='')
         self.tsn_counter = 0
 
-    def generate_tsn(self):
+    def generate_tsn(self, separator=''):
         self.increment_tsn_counter(1)
-        return ''.join([self.date_time, self.mac_number, self.pid, '{:05d}'.format(self.tsn_counter)])
+        return separator.join([self.date_time, self.mac_number, self.pid, '{:05d}'.format(self.tsn_counter)])
 
     def watch_tsn(self):
         while True:
