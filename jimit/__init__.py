@@ -39,13 +39,18 @@ from keep_read import (
     KeepRead
 )
 
+from transaction_serial_number import (
+    TransactionSerialNumber
+)
+
 from exceptions import (
     JITError,
     PreviewingError
 )
 
-__version__ = "0.47"
+__version__ = "0.48"
 
 __all__ = [
-    'Common', 'Check', 'Convert', 'JITime', 'Router', 'Security', 'NetUtils', 'KeepRead', 'JITError', 'PreviewingError'
+    'Common', 'Check', 'Convert', 'JITime', 'Router', 'Security', 'NetUtils', 'KeepRead', 'TransactionSerialNumber',
+    'JITError', 'PreviewingError'
 ]
