@@ -92,7 +92,7 @@ class KeepRead(object):
         return cls.exit_flag
 
     @classmethod
-    # ino for index number
+    # ino for index node number
     def watch_ino(cls):
         cls.increment_thread_counter(1)
         while True:
