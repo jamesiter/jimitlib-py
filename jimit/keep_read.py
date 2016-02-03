@@ -11,6 +11,7 @@ import os
 import json
 import thread
 import signal
+import threading
 
 
 class KeepRead(object):
@@ -49,6 +50,9 @@ class KeepRead(object):
     exit_flag = False
     thread_counter = 0
     filtrator = None
+    # 默认开启线程锁
+    thread_mutex_lock_on = True
+    thread_mutex_lock = threading.Lock()
 
     def __init__(self):
         self.log_path = ''
@@ -168,7 +172,13 @@ class KeepRead(object):
                 raise
 
     def dispose(self):
+        if self.thread_mutex_lock_on:
+            self.thread_mutex_lock.acquire()
+
         KeepRead.filtrator(self.line)
+
+        if self.thread_mutex_lock_on:
+            self.thread_mutex_lock.release()
 
     @classmethod
     def signal_handle(cls, signum=0, frame=None):
