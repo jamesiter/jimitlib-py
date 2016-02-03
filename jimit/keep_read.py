@@ -116,6 +116,7 @@ class KeepRead(object):
                 pass
             except:
                 cls.increment_thread_counter(-1)
+                raise
 
             time.sleep(1)
 
@@ -164,6 +165,7 @@ class KeepRead(object):
                 time.sleep(1)
             except:
                 self.increment_thread_counter(-1)
+                raise
 
     def dispose(self):
         KeepRead.filtrator(self.line)
