@@ -57,7 +57,26 @@ print Router.launcher(action='today', content='-')
 ***
 
 ## 类型判断示例
-## 示例1
+### 参数说明
+``` python
+args_rules = [
+    (类型[int|long|str|basestring|list|dict...](必须), 变量名(必须), 取值范围(可选), 必须存在(可选,默认为True))
+]
+取值范围: 列表为枚举['male', 'female', 'other'], 元组为起止范围(10, 100)
+必须存在: 布尔值,默认为True, 当该值为True时,则表示该变量必须存在; 否则,仅当该变量存在时,才匹配该条策略
+
+args = {
+    '变量名': 变量值
+}
+
+try:
+    ji.Check.previewing(args_rules, args)
+except ji.PreviewingError, e:
+    ret = json.loads(e.message)
+    异常处理域
+```
+
+### 示例1
 ``` python
 状态码200为正常,其它都为异常
 详细描述在ret['state']['sub']中
@@ -78,7 +97,7 @@ form = {
 assert '200' == ji.Check.previewing(form_rules, form)['state']['code'])
 ```
 
-## 示例2
+### 示例2
 ``` python
 form_rules = [
     (str, 'k')
