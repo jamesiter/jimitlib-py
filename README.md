@@ -53,3 +53,45 @@ router_table['today'] = JITime.today
 '''
 print Router.launcher(action='today', content='-')
 ```
+
+***
+
+## 类型判断示例
+## 示例1
+``` python
+状态码200为正常,其它都为异常
+详细描述在ret['state']['sub']中
+异常会于PreviewingError类型抛出,可通过json.loads(e.message)来结构化异常描述
+更多异常用法请移步参考:
+https://github.com/jamesiter/jimitlib-py/blob/master/tests/test_check.py
+
+import jimit as ji
+
+form_rules = [
+    (int, 'k', (10, 100))
+]
+
+form = {
+    'k': 10
+}
+
+assert '200' == ji.Check.previewing(form_rules, form)['state']['code'])
+```
+
+## 示例2
+``` python
+form_rules = [
+    (str, 'k')
+]
+
+form = {
+    'k': 123
+}
+
+try:
+    ji.Check.previewing(form_rules, form)
+except ji.PreviewingError, e:
+    ret = json.loads(e.message)
+    
+assert '41202' == ret['state']['sub']['code']
+```
