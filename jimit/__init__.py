@@ -48,7 +48,7 @@ from exceptions import (
     PreviewingError
 )
 
-__version__ = "0.51"
+__version__ = "0.52"
 
 __all__ = [
     'Common', 'Check', 'Convert', 'JITime', 'Router', 'Security', 'NetUtils', 'KeepRead', 'TransactionSerialNumber',

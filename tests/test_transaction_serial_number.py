@@ -24,9 +24,10 @@ class TestTransactionSerialNumber(unittest.TestCase):
     def testTransactionSerialNumber(self):
         tsn = TransactionSerialNumber()
         tsn.launch()
-        while True:
-            print tsn.generate_tsn('-')
-            time.sleep(0.01)
+        print tsn.generate_tsn('-')
+        # while True:
+        #     print tsn.generate_tsn('-')
+        #     time.sleep(0.01)
 
 if __name__ == '__main__':
     unittest.main()

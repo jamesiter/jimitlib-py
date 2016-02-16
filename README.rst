@@ -66,8 +66,29 @@ James Iter's library by python
 类型判断示例
 ------------
 
+参数说明
+~~~~~~~~
+
+.. code:: python
+
+    args_rules = [
+        (类型[int|long|str|basestring|list|dict...](必须), 变量名(必须), 取值范围(可选), 必须存在(可选,默认为True))
+    ]
+    取值范围: 列表为枚举['male', 'female', 'other'], 元组为起止范围(10, 100)
+    必须存在: 布尔值,默认为True, 当该值为True时,则表示该变量必须存在; 否则,仅当该变量存在时,才匹配该条策略
+
+    args = {
+        '变量名': 变量值
+    }
+
+    try:
+        ji.Check.previewing(args_rules, args)
+    except ji.PreviewingError, e:
+        ret = json.loads(e.message)
+        异常处理域
+
 示例1
------
+~~~~~
 
 .. code:: python
 
@@ -90,7 +111,7 @@ James Iter's library by python
     assert '200' == ji.Check.previewing(form_rules, form)['state']['code'])
 
 示例2
------
+~~~~~
 
 .. code:: python
 
