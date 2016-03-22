@@ -45,6 +45,7 @@ class KeepRead(object):
     # ]
     config = []
     log_file_ino = {}
+    log_file_size = {}
     config_path = '/etc/monitor_log.conf'
     cursor_path = '/var/lib/misc/cursor.ml'
     exit_flag = False
@@ -106,15 +107,29 @@ class KeepRead(object):
 
             try:
                 for item in KeepRead.config:
-                    st_ino = os.stat(item['path']).st_ino
+                    st_stat = os.stat(item['path'])
+                    st_ino = st_stat.st_ino
+                    st_size = st_stat.st_size
                     if item['path'] not in cls.log_file_ino:
                         cls.log_file_ino[item['path']] = dict()
-                        cls.log_file_ino[item['path']]['ino_changed'] = False
+                        cls.log_file_ino[item['path']]['changed'] = False
                         cls.log_file_ino[item['path']]['last'] = st_ino
 
                     if cls.log_file_ino[item['path']]['last'] != st_ino:
-                        cls.log_file_ino[item['path']]['ino_changed'] = True
+                        cls.log_file_ino[item['path']]['changed'] = True
                         cls.log_file_ino[item['path']]['last'] = st_ino
+
+                    if item['path'] not in cls.log_file_size:
+                        cls.log_file_size[item['path']] = dict()
+                        cls.log_file_size[item['path']]['changed'] = False
+                        cls.log_file_size[item['path']]['last'] = st_size
+
+                    # 只有监控的文件缩小时, 才记录改变状态
+                    if cls.log_file_size[item['path']]['last'] > st_size:
+                        cls.log_file_size[item['path']]['changed'] = True
+
+                    # 记录当前文件大小, 如果监控的文件基础大小太小, 而且又在一个周期(这里是1秒)内瞬间从0增至或超过当前大小, 那么在这里是觉察不到的.
+                    cls.log_file_size[item['path']]['last'] = st_size
 
             except OSError:
                 pass
@@ -128,11 +143,21 @@ class KeepRead(object):
     def get_ino_changed(cls, path=None):
         if path not in cls.log_file_ino:
             return False
-        return cls.log_file_ino[path]['ino_changed']
+        return cls.log_file_ino[path]['changed']
 
     @classmethod
     def reset_ino_changed(cls, path=None):
-        cls.log_file_ino[path]['ino_changed'] = False
+        cls.log_file_ino[path]['changed'] = False
+
+    @classmethod
+    def get_size_changed(cls, path=None):
+        if path not in cls.log_file_size:
+            return False
+        return cls.log_file_size[path]['changed']
+
+    @classmethod
+    def reset_size_changed(cls, path=None):
+        cls.log_file_size[path]['changed'] = False
 
     def monitor(self, replace=False):
         # 线程替换时不做增量统计
@@ -158,6 +183,10 @@ class KeepRead(object):
                                 kr.log_path = self.log_path
                                 KeepRead.cursor[kr.log_path] = 0
                                 return thread.start_new_thread(kr.monitor, (True, ))
+
+                            if self.get_size_changed(self.log_path):
+                                self.reset_size_changed(self.log_path)
+                                f.seek(0)
 
                             time.sleep(1)
                             continue

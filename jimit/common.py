@@ -31,12 +31,12 @@ class Common(object):
         """
         if not isinstance(code, int):
             result = Common.exchange_state(50001)
-            raise ji.JITError(json.dumps(result))
+            raise ji.JITError(json.dumps(result, ensure_ascii=False))
 
         trunk_code = int(code / 100)
         if str(trunk_code) not in index_state['trunk']:
             result = Common.exchange_state(50002)
-            raise ji.JITError(json.dumps(result))
+            raise ji.JITError(json.dumps(result, ensure_ascii=False))
 
         result = copy.copy(index_state['trunk'][(str(trunk_code))])
 
