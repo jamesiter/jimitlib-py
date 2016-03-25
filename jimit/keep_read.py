@@ -12,6 +12,11 @@ import json
 import thread
 import signal
 import threading
+import sys
+
+
+reload(sys)
+sys.setdefaultencoding('utf8')
 
 
 class KeepRead(object):
