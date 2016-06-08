@@ -7,6 +7,10 @@ __contact__ = 'james.iter.cn@gmail.com'
 __copyright__ = '(c) 2015 by James Iter.'
 
 
+from state_code import (
+    index_state
+)
+
 from common import (
     Common
 )
@@ -48,9 +52,9 @@ from exceptions import (
     PreviewingError
 )
 
-__version__ = "0.54"
+__version__ = "0.55"
 
 __all__ = [
-    'Common', 'Check', 'Convert', 'JITime', 'Router', 'Security', 'NetUtils', 'KeepRead', 'TransactionSerialNumber',
-    'JITError', 'PreviewingError'
+    'index_state', 'Common', 'Check', 'Convert', 'JITime', 'Router', 'Security', 'NetUtils', 'KeepRead',
+    'TransactionSerialNumber', 'JITError', 'PreviewingError'
 ]

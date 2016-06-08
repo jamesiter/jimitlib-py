@@ -21,24 +21,24 @@ sys.setdefaultencoding('utf8')
 
 class KeepRead(object):
     """
-    配置文件默认路径
-        /etc/monitor_log.conf
-        通过修改参数 KeepRead.config_path 来替换
+        配置文件默认路径
+            /etc/monitor_log.conf
+            通过修改参数 KeepRead.config_path 来替换
 
-    游标持久化默认存储路径
-        /var/lib/misc/cursor.ml
-        通过修改参数 KeepRead.cursor_path 来替换
+        游标持久化默认存储路径
+            /var/lib/misc/cursor.ml
+            通过修改参数 KeepRead.cursor_path 来替换
 
-    用法:
-        设计过滤器方法,输入的参数仅有一个,即每次调用时所读取的行
-        @staticmethod
-        def filtrator(line=None):
-            print line
+        用法:
+            设计过滤器方法,输入的参数仅有一个,即每次调用时所读取的行
+            @staticmethod
+            def filtrator(line=None):
+                print line
 
-        首先指定过滤器
-        KeepRead.filtrator = filtrator
-        启动
-        KeepRead.launch()
+            首先指定过滤器
+            KeepRead.filtrator = filtrator
+            启动
+            KeepRead.launch()
     """
     # Example:
     # {"/var/log/messages": 2341, "/var/log/nginx/error_log": 3521}
