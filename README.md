@@ -13,7 +13,7 @@ own_state_branch = {
             }
         }
         
-ji.state_code.index_state['branch'] = dict(ji.state_code.index_state['branch'], **own_state_branch)
+ji.index_state['branch'] = dict(ji.index_state['branch'], **own_state_branch)
 print json.dumps(ji.Commons.exchange_state(41250), ensure_ascii=False)
 
 {

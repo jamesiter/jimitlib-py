@@ -26,7 +26,7 @@ class Security(object):
             (basestring, 'password'),
             (int, 'quality', (1, 10000)),
             (basestring, 'algorithm', ['md5', 'sha1', 'sha256', 'sha512']),
-            (int, 'password_length', (8, 100)),
+            (int, 'password_length', (0, 1024)),
             (basestring, 'salt')
         ]
 
