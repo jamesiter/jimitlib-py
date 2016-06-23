@@ -200,3 +200,14 @@ class Common(object):
             random_code = ''.join([random_code, random.choice(character_codes)])
 
         return random_code
+
+    @staticmethod
+    def raw_input(prompt=None, echo=False):
+        if echo:
+            input_str = raw_input(prompt=prompt)
+        else:
+            os.system("stty -echo")
+            input_str = raw_input(prompt=prompt)
+            os.system("stty echo")
+
+        return input_str
