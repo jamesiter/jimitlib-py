@@ -202,12 +202,12 @@ class Common(object):
         return random_code
 
     @staticmethod
-    def raw_input(prompt=None, echo=False):
+    def raw_input(prompt='', echo=False):
         if echo:
-            input_str = raw_input(prompt=prompt)
+            input_str = raw_input(prompt)
         else:
             os.system("stty -echo")
-            input_str = raw_input(prompt=prompt)
+            input_str = raw_input(prompt)
             os.system("stty echo")
 
         return input_str

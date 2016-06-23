@@ -8,7 +8,7 @@ __copyright__ = '(c) 2015 by James Iter.'
 
 import sys
 sys.path.append("..")
-from jimit.common import Common
+from jimit import Common
 import unittest
 
 
@@ -61,6 +61,12 @@ class TestCommons(unittest.TestCase):
     def test_generate_random_code(self):
         ret = Common.generate_random_code(100)
         self.assertEqual(100, ret.__len__())
+
+    """
+    def test_raw_input(self):
+        ret = Common.raw_input(u'请输入: ')
+        self.assertIsInstance(ret, basestring)
+    """
 
 if __name__ == '__main__':
     unittest.main()

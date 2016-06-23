@@ -10,6 +10,7 @@ __copyright__ = '(c) 2015 by James Iter.'
 class JITError(Exception):
     pass
 
+
 class PreviewingError(JITError):
     pass
 
