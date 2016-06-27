@@ -83,13 +83,31 @@ class Color(object):
         return color.get()
 
     @staticmethod
+    def error_blink(content=''):
+        color = Color(effect=';'.join([Effect.BOLD.value, Effect.BLINK_SLOW.value]), fore_ground=ForeGround.RED.value,
+                      back_ground=BackGround.BLACK.value, content=content)
+        return color.get()
+
+    @staticmethod
     def warning(content=''):
         color = Color(effect=Effect.BOLD.value, fore_ground=ForeGround.YELLOW.value, back_ground=BackGround.BLACK.value,
                       content=content)
         return color.get()
 
     @staticmethod
+    def warning_blink(content=''):
+        color = Color(effect=';'.join([Effect.BOLD.value, Effect.BLINK_SLOW.value]), fore_ground=ForeGround.YELLOW.value,
+                      back_ground=BackGround.BLACK.value, content=content)
+        return color.get()
+
+    @staticmethod
     def succeed(content=''):
         color = Color(effect=Effect.BOLD.value, fore_ground=ForeGround.GREEN.value, back_ground=BackGround.BLACK.value,
                       content=content)
+        return color.get()
+
+    @staticmethod
+    def succeed_blink(content=''):
+        color = Color(effect=';'.join([Effect.BOLD.value, Effect.BLINK_SLOW.value]), fore_ground=ForeGround.GREEN.value,
+                      back_ground=BackGround.BLACK.value, content=content)
         return color.get()

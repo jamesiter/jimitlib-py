@@ -52,7 +52,7 @@ from exceptions import (
     PreviewingError
 )
 
-__version__ = "0.60"
+__version__ = "0.61"
 
 __all__ = [
     'index_state', 'Common', 'Check', 'Convert', 'JITime', 'Router', 'Security', 'NetUtils', 'KeepRead',
