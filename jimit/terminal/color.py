@@ -73,7 +73,8 @@ class Color(object):
         self.content = kwargs.get('content', '')
 
     def get(self):
-        return ''.join(['\e[', self.effect, ';', self.fore_ground, ';', self.back_ground, 'm', self.content, '\e[0m'])
+        return ''.join(['\033[', self.effect, ';', self.fore_ground, ';', self.back_ground, 'm', self.content,
+                        '\033[0m'])
 
     @staticmethod
     def error(content=''):
