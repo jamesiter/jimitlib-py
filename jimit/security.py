@@ -90,6 +90,12 @@ class Security(object):
 
     @staticmethod
     def ji_hash_sign(algorithm='sha1', secret='', content=None):
+        """ 生成哈希签名
+        :param algorithm: 计算签名的哈希算法,支持有md5、sha1、sha256、sha512
+        :param secret: 签名用的安全码
+        :param content: 计算签名的内容
+        :return: 返回签名
+        """
         args_rules = [
             (basestring, 'algorithm', ['md5', 'sha1', 'sha256', 'sha512']),
             (basestring, 'secret'),
