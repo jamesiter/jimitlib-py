@@ -1,13 +1,16 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+
+from common import *
+import hashlib
+
+
 __author__ = 'James Iter'
 __date__ = '15/6/24'
 __contact__ = 'james.iter.cn@gmail.com'
 __copyright__ = '(c) 2015 by James Iter.'
 
-from common import *
-import hashlib
 
 class Security(object):
 
@@ -84,3 +87,38 @@ class Security(object):
             return True
 
         return False
+
+    @staticmethod
+    def ji_hash_sign(algorithm='sha1', secret='', content=None):
+        args_rules = [
+            (basestring, 'algorithm', ['md5', 'sha1', 'sha256', 'sha512']),
+            (basestring, 'secret'),
+            (dict, 'content', (1, 1024))
+        ]
+
+        ji.Check.previewing(args_rules, locals())
+
+        v_list = list()
+        for k in sorted(content.keys()):
+            if 0 == content[k].__str__().__len__():
+                continue
+
+            v_list.append('='.join([k.__str__(), content[k].__str__()]))
+
+        v_list.append('='.join(['secret', secret]))
+        ligature = '&'.join(v_list)
+
+        hash_method = None
+        if algorithm == 'md5':
+            hash_method = hashlib.md5
+        elif algorithm == 'sha1':
+            hash_method = hashlib.sha1
+        elif algorithm == 'sha256':
+            hash_method = hashlib.sha256
+        elif algorithm == 'sha512':
+            hash_method = hashlib.sha512
+        else:
+            raise KeyError(''.join(['Not support algorithm: ', algorithm]))
+
+        return hash_method(ligature).hexdigest()
+

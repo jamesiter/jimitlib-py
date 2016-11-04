@@ -1,15 +1,16 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+
+from common import *
+import json
+import decimal
+
+
 __author__ = 'James Iter'
 __date__ = '15/4/27'
 __contact__ = 'james.iter.cn@gmail.com'
 __copyright__ = '(c) 2015 by James Iter.'
-
-import decimal
-import json
-
-from common import *
 
 
 class Convert(object):

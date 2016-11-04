@@ -1,11 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-__author__ = 'James Iter'
-__date__ = '15/4/27'
-__contact__ = 'james.iter.cn@gmail.com'
-__copyright__ = '(c) 2015 by James Iter.'
-
 import time
 import copy
 import socket
@@ -15,6 +10,12 @@ import random
 import json
 from state_code import *
 import jimit as ji
+
+
+__author__ = 'James Iter'
+__date__ = '15/4/27'
+__contact__ = 'james.iter.cn@gmail.com'
+__copyright__ = '(c) 2015 by James Iter.'
 
 
 class Common(object):

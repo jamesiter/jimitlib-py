@@ -1,16 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-__author__ = 'James Iter'
-__date__ = '15/6/26'
-__contact__ = 'james.iter.cn@gmail.com'
-__copyright__ = '(c) 2015 by James Iter.'
-
-
-from smtplib import SMTP
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
-from email.mime.image import MIMEImage
 
 """
 Reference: [
@@ -19,6 +9,19 @@ Reference: [
     http://www.tutorialspoint.com/python/python_sending_email.htm
 ]
 """
+
+
+from smtplib import SMTP
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from email.mime.image import MIMEImage
+
+
+__author__ = 'James Iter'
+__date__ = '15/6/26'
+__contact__ = 'james.iter.cn@gmail.com'
+__copyright__ = '(c) 2015 by James Iter.'
+
 
 class NetUtils(object):
 

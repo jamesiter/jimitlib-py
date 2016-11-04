@@ -1,13 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+
+from common import *
+import re
+
+
 __author__ = 'James Iter'
 __date__ = '15/4/27'
 __contact__ = 'james.iter.cn@gmail.com'
 __copyright__ = '(c) 2015 by James Iter.'
-
-from common import *
-import re
 
 
 class Check(object):

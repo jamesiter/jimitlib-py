@@ -28,6 +28,21 @@ index_state = {
             'zh-cn': u'没有内容',
             'en-us': 'No Content'
         },
+        '205': {
+            'code': '205',
+            'zh-cn': u'重置内容',
+            'en-us': 'Reset Content'
+        },
+        '206': {
+            'code': '206',
+            'zh-cn': u'部分内容',
+            'en-us': 'Partial Content'
+        },
+        '207': {
+            'code': '207',
+            'zh-cn': u'扩展状态码',
+            'en-us': 'Multi-Status'
+        },
         '400': {
             'code': '400',
             'zh-cn': u'坏请求',

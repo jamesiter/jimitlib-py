@@ -27,3 +27,9 @@ class TestSecurity(unittest.TestCase):
         ji_pbkdf2_ret = Security.ji_pbkdf2('password')
         ret = Security.ji_pbkdf2_check(password='password', password_hash=ji_pbkdf2_ret)
         self.assertEqual(True, ret)
+
+    def test_ji_hash_sign(self):
+        sign = Security.ji_hash_sign(algorithm='sha1', secret='cke2Ziz6rdraqj6yZoNfFGQvNSnTSeU3',
+                                     content={'k1': 'v1', 'k2': 'v2'})
+        self.assertEqual('e0c901d37eb51cc61feb5eaf4bda60eb21d78576', sign)
+

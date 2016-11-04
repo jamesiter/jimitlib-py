@@ -1,17 +1,18 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-__author__ = 'James Iter'
-__date__ = '16/1/24'
-__contact__ = 'james.iter.cn@gmail.com'
-__copyright__ = '(c) 2015 by James Iter.'
-
 
 import time
 import uuid
 import os
 import thread
 from jimit import JITime
+
+
+__author__ = 'James Iter'
+__date__ = '16/1/24'
+__contact__ = 'james.iter.cn@gmail.com'
+__copyright__ = '(c) 2015 by James Iter.'
 
 
 class TransactionSerialNumber(object):

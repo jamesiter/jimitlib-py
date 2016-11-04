@@ -1,13 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+
+import datetime
+from common import *
+
+
 __author__ = 'James Iter'
 __date__ = '15/5/16'
 __contact__ = 'james.iter.cn@gmail.com'
 __copyright__ = '(c) 2015 by James Iter.'
-
-from common import *
-import datetime
 
 
 class JITime(object):
