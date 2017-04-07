@@ -21,12 +21,15 @@ class JITime(object):
         pass
 
     @staticmethod
-    def gmt(ts=Common.ts()):
+    def gmt(ts=None):
         """
         :rtype : str
         :param ts: 指定时间戳，默认系统当前时间戳
         :return: GMT格式的当前时间('Thu, 18 Jun 2015 10:06:28 GMT')
         """
+        if ts is None:
+            ts = time.time()
+
         return time.strftime('%a, %d %b %Y %H:%M:%S GMT', time.gmtime(ts))
 
     @staticmethod
