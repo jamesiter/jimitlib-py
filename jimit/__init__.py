@@ -47,12 +47,12 @@ from transaction_serial_number import (
     TransactionSerialNumber
 )
 
-from exceptions import (
+from ji_exceptions import (
     JITError,
     PreviewingError
 )
 
-__version__ = "0.62"
+__version__ = "0.64"
 
 __all__ = [
     'index_state', 'Common', 'Check', 'Convert', 'JITime', 'Router', 'Security', 'NetUtils', 'KeepRead',

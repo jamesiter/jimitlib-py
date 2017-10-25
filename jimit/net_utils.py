@@ -29,9 +29,9 @@ class NetUtils(object):
     def smtp_init(host='', port=None, login_name='', password='', tls=False):
         if port is None:
             if tls:
-                tls = 587
+                port = 587
             else:
-                tls = 25
+                port = 25
 
         smtp_server = SMTP(host, port)
         if tls:
