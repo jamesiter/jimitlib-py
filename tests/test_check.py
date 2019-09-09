@@ -38,8 +38,8 @@ class TestCheck(unittest.TestCase):
         }
         try:
             Check.previewing(form_rules, form)
-        except ji.PreviewingError, e:
-            ret = json.loads(e.message)
+        except ji.PreviewingError as e:
+            ret = json.loads(e.__str__())
         self.assertEqual('41201', ret['state']['sub']['code'])
 
         form_rules = [
@@ -50,8 +50,8 @@ class TestCheck(unittest.TestCase):
         }
         try:
             Check.previewing(form_rules, form)
-        except ji.PreviewingError, e:
-            ret = json.loads(e.message)
+        except ji.PreviewingError as e:
+            ret = json.loads(e.__str__())
         self.assertEqual('41202', ret['state']['sub']['code'])
 
         form_rules = [
@@ -62,8 +62,8 @@ class TestCheck(unittest.TestCase):
         }
         try:
             Check.previewing(form_rules, form)
-        except ji.PreviewingError, e:
-            ret = json.loads(e.message)
+        except ji.PreviewingError as e:
+            ret = json.loads(e.__str__())
         self.assertEqual('41203', ret['state']['sub']['code'])
 
         form_rules = [
@@ -74,8 +74,8 @@ class TestCheck(unittest.TestCase):
         }
         try:
             Check.previewing(form_rules, form)
-        except Exception, e:
-            ret = json.loads(e.message)
+        except Exception as e:
+            ret = json.loads(e.__str__())
         self.assertEqual('41204', ret['state']['sub']['code'])
 
         form_rules = [
@@ -86,8 +86,8 @@ class TestCheck(unittest.TestCase):
         }
         try:
             Check.previewing(form_rules, form)
-        except ji.PreviewingError, e:
-            ret = json.loads(e.message)
+        except ji.PreviewingError as e:
+            ret = json.loads(e.__str__())
         self.assertEqual('41207', ret['state']['sub']['code'])
 
         form_rules = [
@@ -98,8 +98,8 @@ class TestCheck(unittest.TestCase):
         }
         try:
             ret = Check.previewing(form_rules, form)
-        except ji.PreviewingError, e:
-            ret = json.loads(e.message)
+        except ji.PreviewingError as e:
+            ret = json.loads(e.__str__())
         self.assertEqual('200', ret['state']['code'])
 
         form_rules = [
@@ -110,44 +110,44 @@ class TestCheck(unittest.TestCase):
         }
         try:
             Check.previewing(form_rules, form)
-        except ji.PreviewingError, e:
-            ret = json.loads(e.message)
+        except ji.PreviewingError as e:
+            ret = json.loads(e.__str__())
         self.assertEqual('41209', ret['state']['sub']['code'])
 
         form_rules = [
-            (basestring, 'email', (8, 64))
+            (str, 'email', (8, 64))
         ]
         form = {
             'email': 'a@b.c'
         }
         try:
             Check.previewing(form_rules, form)
-        except ji.PreviewingError, e:
-            ret = json.loads(e.message)
+        except ji.PreviewingError as e:
+            ret = json.loads(e.__str__())
         self.assertEqual('41203', ret['state']['sub']['code'])
 
         form_rules = [
-            (basestring, 'email', (8, 64), False)
+            (str, 'email', (8, 64), False)
         ]
         form = {
             'xmail': 'a@b.c'
         }
         try:
             ret = Check.previewing(form_rules, form)
-        except ji.PreviewingError, e:
-            ret = json.loads(e.message)
+        except ji.PreviewingError as e:
+            ret = json.loads(e.__str__())
         self.assertEqual('200', ret['state']['code'])
 
         form_rules = [
-            ((int, long), 'number', (0, 100))
+            (int, 'number', (0, 100))
         ]
         form = {
             'number': 10
         }
         try:
             Check.previewing(form_rules, form)
-        except ji.PreviewingError, e:
-            ret = json.loads(e.message)
+        except ji.PreviewingError as e:
+            ret = json.loads(e.__str__())
         self.assertEqual('200', ret['state']['code'])
 
 

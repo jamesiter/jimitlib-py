@@ -3,7 +3,7 @@
 
 
 import datetime
-from common import *
+from .common import *
 
 
 __author__ = 'James Iter'

@@ -22,22 +22,22 @@ class TestColor(unittest.TestCase):
         pass
 
     def test_error(self):
-        print Color.error(u'错误')
+        print(Color.error(u'错误'))
 
     def test_error_blink(self):
-        print Color.error_blink(u'错误')
+        print(Color.error_blink(u'错误'))
 
     def test_warning(self):
-        print Color.warning(u'警告')
+        print(Color.warning(u'警告'))
 
     def test_warning_blink(self):
-        print Color.warning_blink(u'警告')
+        print(Color.warning_blink(u'警告'))
 
     def test_succeed(self):
-        print Color.succeed(u'成功')
+        print(Color.succeed(u'成功'))
 
     def test_succeed_blink(self):
-        print Color.succeed_blink(u'成功')
+        print(Color.succeed_blink(u'成功'))
 
 
 if __name__ == '__main__':

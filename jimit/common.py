@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+
 import time
 import copy
 import socket
@@ -8,7 +9,7 @@ import os
 import hashlib
 import random
 import json
-from state_code import *
+from .state_code import *
 import jimit as ji
 
 
@@ -122,10 +123,10 @@ class Common(object):
                 sha1_obj = hashlib.sha1()
                 sha1_obj.update(f.read())
                 return sha1_obj.hexdigest()
-            except Exception, e:
+            except Exception as e:
                 result['state'] = Common.exchange_state(50004)
                 result['state']['sub']['zh-cn'] = ''.join([result['state']['sub']['zh-cn'],
-                                                           '，详细信息: ', e.message])
+                                                           '，详细信息: ', e.__str__()])
                 raise ji.JITError(json.dumps(result))
 
     @staticmethod
@@ -142,10 +143,10 @@ class Common(object):
             sha1_obj = hashlib.sha1()
             sha1_obj.update(fd.read())
             sha1 = sha1_obj.hexdigest()
-        except Exception, e:
+        except Exception as e:
             result['state'] = Common.exchange_state(50004)
             result['state']['sub']['zh-cn'] = ''.join([result['state']['sub']['zh-cn'],
-                                                       '，详细信息: ', e.message])
+                                                       '，详细信息: ', e.__str__()])
             raise ji.JITError(json.dumps(result))
         finally:
             fd.seek(0, 0)
@@ -164,7 +165,7 @@ class Common(object):
         """
         args_rules = [
             (int, 'length', (1, 1000)),
-            (basestring, 'letter_form', ['lower', 'upper', 'mix']),
+            (str, 'letter_form', ['lower', 'upper', 'mix']),
             (bool, 'numeral'),
             (bool, 'spechars')
         ]

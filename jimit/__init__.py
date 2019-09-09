@@ -7,54 +7,55 @@ __contact__ = 'james.iter.cn@gmail.com'
 __copyright__ = '(c) 2015 by James Iter.'
 
 
-from state_code import (
+from .state_code import (
     index_state
 )
 
-from common import (
+from .common import (
     Common
 )
 
-from check import (
+from .check import (
     Check
 )
 
-from convert import (
+from .convert import (
     Convert
 )
 
-from ji_time import (
+from .ji_time import (
     JITime
 )
 
-from router import (
+from .router import (
     Router
 )
 
-from security import (
+from .security import (
     Security
 )
 
-from net_utils import (
+from .net_utils import (
     NetUtils
 )
 
-from keep_read import (
+from .keep_read import (
     KeepRead
 )
 
-from transaction_serial_number import (
+from .transaction_serial_number import (
     TransactionSerialNumber
 )
 
-from ji_exceptions import (
+from .ji_exceptions import (
     JITError,
     PreviewingError
 )
 
-__version__ = "0.64"
+__version__ = "3.1"
 
 __all__ = [
     'index_state', 'Common', 'Check', 'Convert', 'JITime', 'Router', 'Security', 'NetUtils', 'KeepRead',
     'TransactionSerialNumber', 'JITError', 'PreviewingError'
 ]
+

@@ -4,10 +4,9 @@
 
 import os
 import json
-import thread
 import signal
+import _thread
 import threading
-import sys
 import time
 
 
@@ -15,10 +14,6 @@ __author__ = 'James Iter'
 __date__ = '16/1/17'
 __contact__ = 'james.iter.cn@gmail.com'
 __copyright__ = '(c) 2015 by James Iter.'
-
-
-reload(sys)
-sys.setdefaultencoding('utf8')
 
 
 class KeepRead(object):
@@ -189,7 +184,7 @@ class KeepRead(object):
                                 kr = KeepRead()
                                 kr.log_path = self.log_path
                                 KeepRead.cursor[kr.log_path] = 0
-                                return thread.start_new_thread(kr.monitor, (True, ))
+                                return _thread.start_new_thread(kr.monitor, (True, ))
 
                             if self.get_size_changed(self.log_path):
                                 self.reset_size_changed(self.log_path)
@@ -227,7 +222,7 @@ class KeepRead(object):
         signal.signal(signal.SIGINT, KeepRead.signal_handle)
         KeepRead.load_config()
         KeepRead.restore_cursor()
-        thread.start_new_thread(KeepRead.watch_ino, ())
+        _thread.start_new_thread(KeepRead.watch_ino, ())
         for item in KeepRead.config:
             kr = KeepRead()
             kr.log_path = item['path']
@@ -237,7 +232,7 @@ class KeepRead(object):
             elif kr.log_path not in KeepRead.cursor:
                 KeepRead.cursor[kr.log_path] = 0
 
-            thread.start_new_thread(kr.monitor, ())
+            _thread.start_new_thread(kr.monitor, ())
 
         # 避免上面的for语句过快,导致线程还没有执行increment_thread_counter,
         # 就进入下面的while语句,这样thread_counter此时还为0,故而会跳过线程等待逻辑
@@ -246,5 +241,5 @@ class KeepRead(object):
         while KeepRead.thread_counter > 0:
             time.sleep(1)
         KeepRead.save_cursor()
-        print 'Bye-bye!'
+        print('Bye-bye!')
 

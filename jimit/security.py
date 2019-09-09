@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 
-from common import *
+from .common import *
 import hashlib
 
 
@@ -26,11 +26,11 @@ class Security(object):
         """
         password_length = password.__len__()
         args_rules = [
-            (basestring, 'password'),
+            (str, 'password'),
             (int, 'quality', (1, 10000)),
-            (basestring, 'algorithm', ['md5', 'sha1', 'sha256', 'sha512']),
+            (str, 'algorithm', ['md5', 'sha1', 'sha256', 'sha512']),
             (int, 'password_length', (0, 1024)),
-            (basestring, 'salt')
+            (str, 'salt')
         ]
 
         ji.Check.previewing(args_rules, locals())
@@ -55,7 +55,7 @@ class Security(object):
 
         tmp_quality = quality
         while tmp_quality:
-            password_hash = hash_method(password_hash).hexdigest()
+            password_hash = hash_method(password_hash.encode('utf-8')).hexdigest()
             tmp_quality -= 1
 
         return '$'.join(['ji_pbkdf2', algorithm, str(quality), salt, password_hash])
@@ -71,8 +71,8 @@ class Security(object):
         password_hash_segment = password_hash.split('$')
         password_hash_segment_length = password_hash_segment.__len__()
         args_rules = [
-            (basestring, 'password'),
-            (basestring, 'password_hash'),
+            (str, 'password'),
+            (str, 'password_hash'),
             (int, 'password_hash_segment_length', [5])
         ]
 
@@ -97,8 +97,8 @@ class Security(object):
         :return: 返回签名
         """
         args_rules = [
-            (basestring, 'algorithm', ['md5', 'sha1', 'sha256', 'sha512']),
-            (basestring, 'secret'),
+            (str, 'algorithm', ['md5', 'sha1', 'sha256', 'sha512']),
+            (str, 'secret'),
             (dict, 'content', (1, 1024))
         ]
 
@@ -126,5 +126,5 @@ class Security(object):
         else:
             raise KeyError(''.join(['Not support algorithm: ', algorithm]))
 
-        return hash_method(ligature).hexdigest()
+        return hash_method(ligature.encode('utf-8')).hexdigest()
 

@@ -5,7 +5,7 @@
 import time
 import uuid
 import os
-import thread
+import _thread
 from jimit import JITime
 
 
@@ -43,4 +43,5 @@ class TransactionSerialNumber(object):
             self.clicking()
 
     def launch(self):
-        thread.start_new_thread(self.watch_tsn, ())
+        _thread.start_new_thread(self.watch_tsn, ())
+

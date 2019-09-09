@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 
-from common import *
+from .common import *
 import json
 import decimal
 
@@ -30,9 +30,9 @@ class Convert(object):
                     j_sql[col.name] = str(getattr(sql_obj, col.name))
                 else:
                     j_sql[col.name] = getattr(sql_obj, col.name)
-        except Exception, e:
+        except Exception as e:
             result['state'] = Common.exchange_state(50003)
-            result['state']['sub']['detail'] = e.message
+            result['state']['sub']['detail'] = e.__str__()
             raise ji.JITError(json.dumps(result))
 
         result['j_sql'] = j_sql

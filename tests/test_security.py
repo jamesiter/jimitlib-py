@@ -21,7 +21,7 @@ class TestSecurity(unittest.TestCase):
 
     def test_ji_pbkdf2(self):
         ret = Security.ji_pbkdf2('password')
-        self.assertIsInstance(ret, basestring)
+        self.assertIsInstance(ret, str)
 
     def test_ji_pbkdf2_check(self):
         ji_pbkdf2_ret = Security.ji_pbkdf2('password')

@@ -14,7 +14,7 @@ import unittest
 
 @staticmethod
 def filtrator(line=None):
-    print line
+    print(line)
 
 
 class TestKeepRead(unittest.TestCase):
