@@ -101,7 +101,7 @@ class JITime(object):
         :return: 像前偏移n月的月初时间戳
         """
         today_date = datetime.date.today()
-        offset_year = offset / 12
+        offset_year = offset // 12
         offset_month = offset % 12
         if today_date.month == offset_month:
             offset_month -= 12
@@ -118,7 +118,7 @@ class JITime(object):
         """
         today_date = datetime.date.today()
         offset += today_date.month
-        offset_year = offset / 12
+        offset_year = offset // 12
         offset_month = offset % 12
         return int(today_date.replace(year=today_date.year + offset_year, month=offset_month,
                                       day=1).strftime('%s'))

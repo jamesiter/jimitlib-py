@@ -206,10 +206,10 @@ class Common(object):
     @staticmethod
     def raw_input(prompt='', echo=False):
         if echo:
-            input_str = raw_input(prompt)
+            input_str = input(prompt)
         else:
             os.system("stty -echo")
-            input_str = raw_input(prompt)
+            input_str = input(prompt)
             os.system("stty echo")
 
         return input_str
