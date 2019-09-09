@@ -52,7 +52,7 @@ from .ji_exceptions import (
     PreviewingError
 )
 
-__version__ = "3.1"
+__version__ = "3.2"
 
 __all__ = [
     'index_state', 'Common', 'Check', 'Convert', 'JITime', 'Router', 'Security', 'NetUtils', 'KeepRead',
